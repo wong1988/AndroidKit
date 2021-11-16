@@ -1,0 +1,3 @@
+rootProject.name = "AndroidKit"
+include ':app'
+include ':AndroidKit'
