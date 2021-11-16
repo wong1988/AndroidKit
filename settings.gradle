@@ -1,3 +1,3 @@
-rootProject.name = "AndroidKit"
+rootProject.name = "AndroidKitSample"
 include ':app'
 include ':AndroidKit'

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidKit.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidKit.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidKit/AndroidKit.AndroidKit.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidKit/AndroidKit.AndroidKit.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidKit.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidKit.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidKitSample.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidKitSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidKit/AndroidKitSample.AndroidKit.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidKit/AndroidKitSample.AndroidKit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidKitSample.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidKitSample.app.iml" />
     </modules>
   </component>
 </project>
