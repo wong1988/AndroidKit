@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import io.github.kit.example.R;
-import io.github.wong1988.kit.StringUtils;
+import io.github.wong1988.kit.utils.StringUtils;
 
 public class StringUtilsActivity extends AppCompatActivity {
 
