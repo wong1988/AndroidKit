@@ -17,26 +17,26 @@ public class ContactInfo {
     // 姓名相同的字符下标（因为有可能会跳跃特殊字符，所以下标返回）
     private List<Integer> nameSameChar;
     // 特殊字段
-    private final ContactPinYin contactPinYin;
+    private final ContactPinYinInfo contactPinYinInfo;
 
-    public ContactInfo(String name, ContactPinYin contactPinYin) {
+    public ContactInfo(String name, ContactPinYinInfo contactPinYinInfo) {
 
         if (name == null)
             name = "";
         this.name = name;
 
-        if (contactPinYin == null)
-            contactPinYin = new ContactPinYin(null, null, null);
+        if (contactPinYinInfo == null)
+            contactPinYinInfo = new ContactPinYinInfo(null, null, null);
 
-        this.contactPinYin = contactPinYin;
+        this.contactPinYinInfo = contactPinYinInfo;
     }
 
     public String getName() {
         return name;
     }
 
-    public ContactPinYin getContactPinYin() {
-        return contactPinYin;
+    public ContactPinYinInfo getContactPinYin() {
+        return contactPinYinInfo;
     }
 
     public String getPhone() {
@@ -70,7 +70,7 @@ public class ContactInfo {
                 ", phone='" + phone + '\'' +
                 ", phoneSameChar='" + phoneSameChar + '\'' +
                 ", nameSameChar=" + nameSameChar +
-                ", contactPinYin=" + contactPinYin +
+                ", contactPinYin=" + contactPinYinInfo +
                 '}';
     }
 }

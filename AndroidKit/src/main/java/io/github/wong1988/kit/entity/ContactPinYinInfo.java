@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 联系人拼音的实体类
  */
-public class ContactPinYin {
+public class ContactPinYinInfo {
 
     // 每个字符的拼音
     private final List<List<String>> pinyin;
@@ -22,7 +22,7 @@ public class ContactPinYin {
     // 原文所有下标【由实体类进行计算】
     private final List<Integer> originalIndexes;
 
-    public ContactPinYin(String originalText, List<List<String>> pinyin, List<Integer> fitCharIndexes) {
+    public ContactPinYinInfo(String originalText, List<List<String>> pinyin, List<Integer> fitCharIndexes) {
 
         // 初始化其他内容
 
