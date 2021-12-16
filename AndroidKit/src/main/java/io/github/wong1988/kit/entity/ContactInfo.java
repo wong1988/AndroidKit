@@ -35,7 +35,7 @@ public class ContactInfo {
         return name;
     }
 
-    public ContactPinYinInfo getContactPinYin() {
+    public ContactPinYinInfo getContactPinYinInfo() {
         return contactPinYinInfo;
     }
 
