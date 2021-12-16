@@ -3,6 +3,9 @@ package io.github.wong1988.kit.entity;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Android通讯录联系人信息
+ */
 public class ContactInfo {
 
     // 基础字段
