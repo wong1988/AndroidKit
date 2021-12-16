@@ -7,6 +7,7 @@ import com.github.promeg.pinyinhelper.PinyinMapDict;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public abstract class AndroidAssetDict extends PinyinMapDict {
     private void init() {
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(mContext.getAssets().open(assetFileName()), "utf-8"));
+            reader = new BufferedReader(new InputStreamReader(mContext.getAssets().open(assetFileName()), StandardCharsets.UTF_8));
             String line;
             while ((line = reader.readLine()) != null) {
                 // process the line.
