@@ -129,7 +129,7 @@ public class ContactPinYinInfo {
 
     @Override
     public String toString() {
-        return "PinYinCanSearchWord{" +
+        return "ContactPinYinInfo{" +
                 "pinyin=" + pinyin +
                 ", pinYinCombination=" + Arrays.toString(pinYinCombination) +
                 ", originalText='" + originalText + '\'' +
