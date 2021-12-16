@@ -70,7 +70,7 @@ public class ContactInfo {
                 ", phone='" + phone + '\'' +
                 ", phoneSameChar='" + phoneSameChar + '\'' +
                 ", nameSameChar=" + nameSameChar +
-                ", contactPinYin=" + contactPinYinInfo +
+                ", contactPinYinInfo=" + contactPinYinInfo +
                 '}';
     }
 }
