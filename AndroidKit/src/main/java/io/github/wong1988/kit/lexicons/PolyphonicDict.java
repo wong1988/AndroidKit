@@ -2,6 +2,8 @@ package io.github.wong1988.kit.lexicons;
 
 import android.content.Context;
 
+import com.github.promeg.tinypinyin.android.asset.lexicons.AndroidAssetDict;
+
 public class PolyphonicDict extends AndroidAssetDict {
 
     static volatile PolyphonicDict singleton = null;

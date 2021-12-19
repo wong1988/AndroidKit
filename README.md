@@ -15,6 +15,6 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.github.wong1988:AndroidKit:0.0.3'
+    implementation 'com.github.wong1988:AndroidKit:0.0.4'
 }
 ```
