@@ -82,4 +82,18 @@ public class MapLocation {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "MapLocation{" +
+                "longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", street='" + street + '\'' +
+                ", streetNum='" + streetNum + '\'' +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }
