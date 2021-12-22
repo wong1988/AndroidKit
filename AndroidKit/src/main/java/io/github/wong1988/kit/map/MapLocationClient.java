@@ -30,7 +30,7 @@ public class MapLocationClient {
     }
 
     /**
-     * 获取权限，并检查有无开户GPS
+     * 初始化
      */
     private void initLocationManager() {
         mLocationManager = (LocationManager) AndroidKit.getInstance().getAppContext().getSystemService(Context.LOCATION_SERVICE);
@@ -48,11 +48,15 @@ public class MapLocationClient {
         criteria.setAltitudeRequired(true);
         // 是否查询方位角 : 否
         criteria.setBearingRequired(false);
+        // 是否允许产生资费 : 是
+        criteria.setCostAllowed(true);
         // 设置是否要求速度
         criteria.setSpeedRequired(false);
         // 电量要求：低
         criteria.setPowerRequirement(Criteria.POWER_LOW);
-        mBestProvider = mLocationManager.getBestProvider(criteria, false);  // 获取最佳定位
+        // 获取最佳定位
+        mBestProvider = mLocationManager.getBestProvider(criteria, false);
+
         mLocationListener = new LocationListener() {
 
             @Override
@@ -92,7 +96,7 @@ public class MapLocationClient {
                         mapLocation.setStreetNum(streetNum);
                     }
 
-                    mMapLocationListener.location(mapLocation, "");
+                    mMapLocationListener.onLocationChanged(mapLocation, -1);
 
                 }
             }
@@ -109,9 +113,19 @@ public class MapLocationClient {
 
             @Override
             public void onProviderDisabled(String provider) {
-                if (!mLocationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)) {
-                    if (mMapLocationListener != null)
-                        mMapLocationListener.location(null, "GPS未开启");
+                switch (provider) {
+                    case LocationManager.GPS_PROVIDER:
+                        if (mMapLocationListener != null)
+                            mMapLocationListener.onLocationChanged(null, 1);
+                        break;
+                    case LocationManager.NETWORK_PROVIDER:
+                        if (mMapLocationListener != null)
+                            mMapLocationListener.onLocationChanged(null, 2);
+                        break;
+                    case LocationManager.PASSIVE_PROVIDER:
+                        if (mMapLocationListener != null)
+                            mMapLocationListener.onLocationChanged(null, 0);
+                        break;
                 }
             }
         };
