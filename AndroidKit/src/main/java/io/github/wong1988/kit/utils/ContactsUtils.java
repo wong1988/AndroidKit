@@ -1,7 +1,6 @@
 package io.github.wong1988.kit.utils;
 
 import android.Manifest;
-import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
@@ -15,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import io.github.wong1988.kit.AndroidKit;
 import io.github.wong1988.kit.entity.ContactCompareInfo;
 import io.github.wong1988.kit.entity.ContactInfo;
 import io.github.wong1988.kit.entity.ContactPinYinInfo;
@@ -26,11 +26,11 @@ public class ContactsUtils {
      * 获取通讯录，需要读取联系人权限
      */
     @RequiresPermission(allOf = {Manifest.permission.READ_CONTACTS})
-    public static List<ContactInfo> getContacts(Context context) {
+    public static List<ContactInfo> getContacts() {
 
         List<ContactInfo> list = new ArrayList<>();
 
-        Cursor cursor = context.getContentResolver().query(
+        Cursor cursor = AndroidKit.getInstance().getAppContext().getContentResolver().query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, "display_name COLLATE LOCALIZED");
 
         if (cursor == null || cursor.getCount() == 0) {
@@ -38,7 +38,7 @@ public class ContactsUtils {
         }
 
         // 加载识别多音字的字库，仅加载一次，否则很耗时(耗时约100-200ms)
-        Pinyin.init(Pinyin.newConfig().with(PolyphonicDict.getInstance(context)));
+        Pinyin.init(Pinyin.newConfig().with(PolyphonicDict.getInstance(AndroidKit.getInstance().getAppContext())));
 
         // 联系人拼音
         ContactPinYinInfo temp = new ContactPinYinInfo(null, null, null);
