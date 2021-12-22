@@ -1,11 +1,14 @@
 package io.github.wong1988.kit.entity;
 
+/**
+ * 地图定位实体类
+ */
 public class MapLocation {
 
     // 经度
-    private double longitude;
+    private final double longitude;
     // 纬度
-    private double latitude;
+    private final double latitude;
     // 省
     private String province;
     // 市
@@ -33,7 +36,7 @@ public class MapLocation {
     }
 
     public String getProvince() {
-        return province;
+        return province == null ? "" : province;
     }
 
     public void setProvince(String province) {
