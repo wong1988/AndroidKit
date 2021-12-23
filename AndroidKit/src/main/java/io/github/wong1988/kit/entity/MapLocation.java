@@ -9,6 +9,8 @@ public class MapLocation {
     private final double longitude;
     // 纬度
     private final double latitude;
+    // 是否包含以下城市信息
+    private boolean hasCityInfo;
     // 省
     private String province;
     // 市
@@ -33,6 +35,14 @@ public class MapLocation {
 
     public double getLatitude() {
         return latitude;
+    }
+
+    public boolean isHasCityInfo() {
+        return hasCityInfo;
+    }
+
+    public void setHasCityInfo(boolean hasCityInfo) {
+        this.hasCityInfo = hasCityInfo;
     }
 
     public String getProvince() {
@@ -85,15 +95,23 @@ public class MapLocation {
 
     @Override
     public String toString() {
-        return "MapLocation{" +
-                "longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", street='" + street + '\'' +
-                ", streetNum='" + streetNum + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        if (hasCityInfo)
+            return "MapLocation{" +
+                    "longitude=" + longitude +
+                    ", latitude=" + latitude +
+                    ", hasCityInfo=true" +
+                    ", province='" + province + '\'' +
+                    ", city='" + city + '\'' +
+                    ", country='" + country + '\'' +
+                    ", street='" + street + '\'' +
+                    ", streetNum='" + streetNum + '\'' +
+                    ", address='" + address + '\'' +
+                    '}';
+        else
+            return "MapLocation{" +
+                    "longitude=" + longitude +
+                    ", latitude=" + latitude +
+                    ", hasCityInfo=false" +
+                    '}';
     }
 }

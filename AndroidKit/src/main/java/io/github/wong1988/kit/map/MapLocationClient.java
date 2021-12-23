@@ -1,5 +1,6 @@
 package io.github.wong1988.kit.map;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Address;
 import android.location.Criteria;
@@ -24,6 +25,8 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class MapLocationClient {
 
     private LocationManager mLocationManager;
+    private boolean mOnceLocation;
+    private boolean mCityInfoRequired = true;
 
     public MapLocationClient() {
         initLocationManager();
@@ -59,8 +62,13 @@ public class MapLocationClient {
 
         mLocationListener = new LocationListener() {
 
+            @SuppressLint("MissingPermission")
             @Override
             public void onLocationChanged(Location location) {
+
+                if (mOnceLocation) {
+                    stopLocation();
+                }
 
                 if (mMapLocationListener != null) {
 
@@ -69,31 +77,34 @@ public class MapLocationClient {
 
                     MapLocation mapLocation = new MapLocation(longitude, latitude);
 
-                    List<Address> addresses = new ArrayList<>();
-                    // 经纬度转城市
-                    Geocoder geocoder = new Geocoder(AndroidKit.getInstance().getAppContext());
-                    try {
-                        addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    if (mCityInfoRequired) {
+                        List<Address> addresses = new ArrayList<>();
+                        // 经纬度转城市
+                        Geocoder geocoder = new Geocoder(AndroidKit.getInstance().getAppContext());
+                        try {
+                            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-                    if (addresses != null && addresses.size() > 0) {
+                        if (addresses != null && addresses.size() > 0) {
 
-                        Address address = addresses.get(0);
-                        String province = address.getAdminArea();
-                        String city = address.getLocality();
-                        String country = address.getSubLocality();
-                        String street = address.getThoroughfare();
-                        String streetNum = address.getSubThoroughfare();
-                        String featureName = address.getFeatureName();
+                            Address address = addresses.get(0);
+                            String province = address.getAdminArea();
+                            String city = address.getLocality();
+                            String country = address.getSubLocality();
+                            String street = address.getThoroughfare();
+                            String streetNum = address.getSubThoroughfare();
+                            String featureName = address.getFeatureName();
 
-                        mapLocation.setAddress(featureName);
-                        mapLocation.setProvince(province);
-                        mapLocation.setCity(city);
-                        mapLocation.setCountry(country);
-                        mapLocation.setStreet(street);
-                        mapLocation.setStreetNum(streetNum);
+                            mapLocation.setAddress(featureName);
+                            mapLocation.setProvince(province);
+                            mapLocation.setCity(city);
+                            mapLocation.setCountry(country);
+                            mapLocation.setStreet(street);
+                            mapLocation.setStreetNum(streetNum);
+                            mapLocation.setHasCityInfo(true);
+                        }
                     }
 
                     mMapLocationListener.onLocationChanged(mapLocation, -1);
@@ -157,4 +168,17 @@ public class MapLocationClient {
         mLocationManager.removeUpdates(mLocationListener);
     }
 
+    /**
+     * 单次定位，默认否
+     */
+    public void setOnceLocation(boolean b) {
+        mOnceLocation = b;
+    }
+
+    /**
+     * 是否获取城市信息，默认获取
+     */
+    public void setCityInfoRequired(boolean b) {
+        mCityInfoRequired = b;
+    }
 }
