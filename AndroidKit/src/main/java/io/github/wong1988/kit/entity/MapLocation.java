@@ -1,5 +1,7 @@
 package io.github.wong1988.kit.entity;
 
+import io.github.wong1988.kit.utils.CoordTransformUtils;
+
 /**
  * 地图定位实体类
  */
@@ -92,6 +94,29 @@ public class MapLocation {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    /**
+     * 获取原生定位坐标
+     */
+    public LatLng getWGS84LatLng() {
+        return new LatLng(getLatitude(), getLongitude());
+    }
+
+    /**
+     * 获取高德地图坐标
+     */
+    public LatLng getGCJ024LatLng() {
+        return CoordTransformUtils.WGS84ToGCJ02(getLongitude(), getLatitude());
+    }
+
+    /**
+     * 获取百度定位坐标
+     */
+    public LatLng getBD09LatLng() {
+        LatLng gcj02 = CoordTransformUtils.WGS84ToGCJ02(getLongitude(), getLatitude());
+        return CoordTransformUtils.GCJ02ToBD09(gcj02.longitude, gcj02.latitude);
+    }
+
 
     @Override
     public String toString() {
