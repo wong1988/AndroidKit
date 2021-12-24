@@ -1,5 +1,8 @@
 package io.github.wong1988.kit.type;
 
+/**
+ * 坐标系
+ */
 public enum CoordinateSystem {
 
     WGS84("地球坐标", "国际地图提供商，谷歌国际地图"),
