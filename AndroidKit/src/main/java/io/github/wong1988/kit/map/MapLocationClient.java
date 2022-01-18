@@ -147,8 +147,9 @@ public class MapLocationClient {
     /**
      * 设置定位监听
      */
-    public void setLocationListener(MapLocationListener listener) {
+    public MapLocationClient setLocationListener(MapLocationListener listener) {
         this.mMapLocationListener = listener;
+        return this;
     }
 
     /**
