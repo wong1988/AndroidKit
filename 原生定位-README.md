@@ -14,7 +14,7 @@ setOnceLocation()
 // 是否获取城市信息，默认仅获取定位坐标
 setCityInfoRequired()
 // 开始定位，当前方法会提示进行权限申请
-// 如已经申请可填写注解 @SuppressLint("MissingPermission")
+// 如已经申请可填写注解 @SuppressLint("MissingPermission") 忽略编辑器提示
 startLocation()
 // 结束定位
 stopLocation()
