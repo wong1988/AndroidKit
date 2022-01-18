@@ -1,5 +1,8 @@
 package io.github.wong1988.kit.map;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Address;
@@ -18,9 +21,6 @@ import java.util.List;
 
 import io.github.wong1988.kit.AndroidKit;
 import io.github.wong1988.kit.entity.MapLocation;
-
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MapLocationClient {
 
@@ -66,9 +66,8 @@ public class MapLocationClient {
             @Override
             public void onLocationChanged(Location location) {
 
-                if (mOnceLocation) {
+                if (mOnceLocation)
                     stopLocation();
-                }
 
                 if (mMapLocationListener != null) {
 
@@ -163,7 +162,7 @@ public class MapLocationClient {
     /**
      * 结束定位
      */
-    @RequiresPermission(anyOf = {ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION})
+    @SuppressLint("MissingPermission")
     public void stopLocation() {
         mLocationManager.removeUpdates(mLocationListener);
     }
@@ -171,14 +170,16 @@ public class MapLocationClient {
     /**
      * 单次定位，默认否
      */
-    public void setOnceLocation(boolean b) {
+    public MapLocationClient setOnceLocation(boolean b) {
         mOnceLocation = b;
+        return this;
     }
 
     /**
      * 是否获取城市信息，默认获取
      */
-    public void setCityInfoRequired(boolean b) {
+    public MapLocationClient setCityInfoRequired(boolean b) {
         mCityInfoRequired = b;
+        return this;
     }
 }
