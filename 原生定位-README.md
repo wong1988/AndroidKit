@@ -29,5 +29,5 @@ stopLocation()
 ## About
 
 注意：
-1. 需要在清单文件进行申请权限 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+1. 需要在清单文件进行申请权限 `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />`
 2. 需要动态获取运行时权限 Manifest.permission.ACCESS_FINE_LOCATION 与 Manifest.permission.ACCESS_COARSE_LOCATION
