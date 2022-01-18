@@ -22,7 +22,7 @@ stopLocation()
 
 监听器
 ```
-1. setLocationListener() 定位的监听
+1. setLocationListener() 定位的回调监听
 ```
 
 
