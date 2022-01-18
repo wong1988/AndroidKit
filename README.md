@@ -17,3 +17,14 @@ dependencies {
     implementation 'com.github.wong1988:AndroidKit:0.0.4'
 }
 ```
+Step 3. 在Application进行初始化
+```
+AndroidKit.init(application);
+```
+
+
+## Change Log
+
+0.0.4:
+
+ * 首个版本发布
