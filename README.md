@@ -22,6 +22,8 @@ Step 3. 在Application进行初始化
 AndroidKit.init(application);
 ```
 
+### 原生定位 | [查看使用方式](https://github.com/wong1988/AndroidKit/blob/main/原生定位-README.md)
+
 
 ## Change Log
 
