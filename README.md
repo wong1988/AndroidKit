@@ -14,7 +14,7 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.github.wong1988:AndroidKit:1.0.0'
+    implementation 'com.github.wong1988:AndroidKit:1.0.1'
 }
 ```
 Step 3. 在Application进行初始化
@@ -29,6 +29,6 @@ AndroidKit.init(application);
 
 ## Change Log
 
-0.0.9:
+1.0.1:
 
  * 首个版本发布
