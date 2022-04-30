@@ -14,7 +14,8 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.github.wong1988:AndroidKit:1.0.1'
+    implementation 'com.github.wong1988:AndroidKit:1.0.2'
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 ```
 Step 3. 在Application进行初始化
@@ -28,6 +29,10 @@ AndroidKit.init(application);
 
 
 ## Change Log
+
+1.0.2:
+
+ * 加入了gson序列化、反序列化的处理，String = null 处理成“”  List = null 处理成 []，详细可查看使用demo
 
 1.0.1:
 
