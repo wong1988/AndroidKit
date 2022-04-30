@@ -21,6 +21,9 @@
         <activity
             android:name=".activity.StringUtilsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode" />
+        <activity
+            android:name=".activity.GsonActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode" />
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import io.github.kit.example.activity.GsonActivity;
 import io.github.kit.example.activity.StringUtilsActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,5 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void stringUtils(View view) {
         startActivity(new Intent(this, StringUtilsActivity.class));
+    }
+
+    public void Gson(View view) {
+        startActivity(new Intent(this, GsonActivity.class));
     }
 }

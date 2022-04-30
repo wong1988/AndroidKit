@@ -16,6 +16,12 @@
             android:onClick="stringUtils"
             android:text="StringUtils" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="Gson"
+            android:text="Gson" />
+
     </LinearLayout>
 
 </ScrollView>
