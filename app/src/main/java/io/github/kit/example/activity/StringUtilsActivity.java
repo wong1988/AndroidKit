@@ -70,7 +70,7 @@ public class StringUtilsActivity extends AppCompatActivity {
                 "数字原字符串中的下标：" + stringInfo.getNumberCharIndex().toString() + "\n" +
                 "其他字符：" + stringInfo.getOtherChar() + "\n" +
                 "其他字符原字符串中的下标：" + stringInfo.getOtherCharIndex();
-        
+
         tv.setText(buffer);
     }
 }

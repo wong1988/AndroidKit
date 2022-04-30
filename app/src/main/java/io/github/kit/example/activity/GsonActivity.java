@@ -7,15 +7,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.Arrays;
 import java.util.List;
 
 import io.github.kit.example.R;
 import io.github.kit.example.bean.Pet;
-import io.github.wong1988.kit.gson.CollectionTypeAdapterFactory;
-import io.github.wong1988.kit.gson.StringTypeAdapterFactory;
+import io.github.wong1988.kit.utils.GsonUtils;
 
 public class GsonActivity extends AppCompatActivity {
 
@@ -34,7 +32,7 @@ public class GsonActivity extends AppCompatActivity {
         pet.setName("小黑");
         pet.setPhotoUrls(Arrays.asList("http://www.baidu.com/1", "http://www.baidu.com/2"));
 
-        Gson gson = new GsonBuilder().serializeNulls().create();
+        Gson gson = GsonUtils.gsonSerializeNulls();
         tv.setText(gson.toJson(pet));
 
     }
@@ -44,7 +42,7 @@ public class GsonActivity extends AppCompatActivity {
         pet.setName("小黑");
         pet.setPhotoUrls(Arrays.asList("http://www.baidu.com/1", "http://www.baidu.com/2"));
 
-        Gson gson = new Gson();
+        Gson gson = GsonUtils.gson();
         tv.setText(gson.toJson(pet));
     }
 
@@ -52,7 +50,7 @@ public class GsonActivity extends AppCompatActivity {
         serialization(view);
         String s = tv.getText().toString();
 
-        Pet pet = new Gson().fromJson(s, Pet.class);
+        Pet pet = GsonUtils.gson().fromJson(s, Pet.class);
         Pet.CategoryBean category = pet.getCategory();
         String name = pet.getName();
         List<String> photoUrls = pet.getPhotoUrls();
@@ -68,10 +66,7 @@ public class GsonActivity extends AppCompatActivity {
         serialization(view);
         String s = tv.getText().toString();
 
-        Pet pet = new GsonBuilder()
-                .registerTypeAdapterFactory(new StringTypeAdapterFactory())
-                .registerTypeAdapterFactory(new CollectionTypeAdapterFactory())
-                .create()
+        Pet pet = GsonUtils.gsonNullsByDefault()
                 .fromJson(s, Pet.class);
         Pet.CategoryBean category = pet.getCategory();
         String name = pet.getName();
@@ -89,10 +84,7 @@ public class GsonActivity extends AppCompatActivity {
         pet.setName("小黑");
         pet.setPhotoUrls(Arrays.asList("http://www.baidu.com/1", "http://www.baidu.com/2"));
 
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapterFactory(new StringTypeAdapterFactory())
-                .registerTypeAdapterFactory(new CollectionTypeAdapterFactory())
-                .serializeNulls().create();
+        Gson gson = GsonUtils.gsonNullsByDefault();
         tv.setText(gson.toJson(pet));
 
     }
