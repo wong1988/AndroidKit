@@ -82,4 +82,18 @@ public class GsonActivity extends AppCompatActivity {
         s = s + "\n\n取值\n" + "category[Object]:" + category + "\nstatus[String]:" + status + "\nname[String]:" + name + "\nphotoUrls[Array]:" + photoUrls.toString() + "\ntags[Array]:" + tags;
         tv.setText(s);
     }
+
+    public void serialization3(View view) {
+
+        Pet pet = new Pet();
+        pet.setName("小黑");
+        pet.setPhotoUrls(Arrays.asList("http://www.baidu.com/1", "http://www.baidu.com/2"));
+
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapterFactory(new StringTypeAdapterFactory())
+                .registerTypeAdapterFactory(new CollectionTypeAdapterFactory())
+                .serializeNulls().create();
+        tv.setText(gson.toJson(pet));
+
+    }
 }

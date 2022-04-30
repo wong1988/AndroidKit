@@ -38,6 +38,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:onClick="serialization3"
+                android:text="序列化输出所有字段赋默认值[Sting 空字符串 List 长度为0的空集合]" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:onClick="deserialization"
                 android:text="反序列化,并取值" />
 

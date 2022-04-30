@@ -96,7 +96,8 @@ public final class CollectionTypeAdapterFactory implements TypeAdapterFactory {
         @Override
         public void write(JsonWriter out, Collection<E> collection) throws IOException {
             if (collection == null) {
-                out.nullValue();
+                out.beginArray();
+                out.endArray();
                 return;
             }
 
