@@ -37,4 +37,5 @@ dependencies {
     compileOnly 'com.google.android.material:material:1.2.1'
 
     api 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
+    compileOnly 'com.google.code.gson:gson:2.9.0'
 }
