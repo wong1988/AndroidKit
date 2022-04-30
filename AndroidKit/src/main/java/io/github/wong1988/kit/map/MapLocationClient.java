@@ -1,8 +1,5 @@
 package io.github.wong1988.kit.map;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Address;
@@ -21,6 +18,9 @@ import java.util.List;
 
 import io.github.wong1988.kit.AndroidKit;
 import io.github.wong1988.kit.entity.MapLocation;
+
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MapLocationClient {
 

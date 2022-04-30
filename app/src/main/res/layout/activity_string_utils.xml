@@ -29,6 +29,7 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="parseInt"
                 android:text="parseInt" />
@@ -36,6 +37,7 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="parseLong"
                 android:text="parseLong" />
@@ -43,6 +45,7 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="parseFloat"
                 android:text="parseFloat" />
@@ -50,9 +53,25 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="parseDouble"
                 android:text="parseDouble" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:onClick="getStringInfo"
+                android:text="获取字符串信息" />
 
         </LinearLayout>
 
