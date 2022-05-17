@@ -71,5 +71,17 @@ public class StorageUtils {
         return new File(sharedStorageFolder(SharedStorage.DIRECTORY_PICTURES, subFolder), fileName).getAbsolutePath();
     }
 
+    /**
+     * 共享存储空间（Download）目录文件
+     * 推荐：subFolder不为null
+     *
+     * @param subFolder eg1: null(根目录下的文件)  eg2: cache + File.separator + thumbnail(根目录/cache/thumbnail下的文件)
+     * @param fileName  文件名： 123.jpg
+     */
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    public static String sharedDownloadFile(String subFolder, String fileName) {
+        return new File(sharedStorageFolder(SharedStorage.DIRECTORY_DOWNLOAD, subFolder), fileName).getAbsolutePath();
+    }
+
 
 }
