@@ -20,6 +20,8 @@ public class RegexUtils {
     static final String CONTAINS_NUMBERS = ".*\\d+.*";
     // 是否包含特殊字符
     static final String CONTAINS_SPECIAL = "([^\\u4e00-\\u9fa5\\w])+?";
+    // 文件夹不允许的特殊字符
+    static final String CONTAINS_FOLDER_SPECIAL = "[\\s\\\\/:\\*\\?\\\"<>\\|]";
 
 
     /**
@@ -58,5 +60,23 @@ public class RegexUtils {
         Pattern pattern = Pattern.compile(CONTAINS_SPECIAL);
         Matcher matcher = pattern.matcher(str);
         return matcher.replaceAll("");
+    }
+
+    /**
+     * 移除文件夹特殊字符
+     */
+    public static String removeFolderSpecialChars(String str) {
+        if (str == null)
+            return "";
+        Pattern pattern = Pattern.compile(CONTAINS_FOLDER_SPECIAL);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.replaceAll("");
+    }
+
+    /**
+     * 文件夹名称是否正确
+     */
+    public static boolean folderCorrect(String str) {
+        return removeFolderSpecialChars(str).equals(str);
     }
 }
