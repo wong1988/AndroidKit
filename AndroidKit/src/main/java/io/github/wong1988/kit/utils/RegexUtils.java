@@ -20,8 +20,8 @@ public class RegexUtils {
     static final String CONTAINS_NUMBERS = ".*\\d+.*";
     // 是否包含特殊字符
     static final String CONTAINS_SPECIAL = "([^\\u4e00-\\u9fa5\\w])+?";
-    // 文件夹不允许的特殊字符
-    static final String CONTAINS_FOLDER_SPECIAL = "[\\s\\\\/:\\*\\?\\\"<>\\|]";
+    // 文件夹不允许的特殊字符 / \ " : | * ? < >
+    static final String CONTAINS_FOLDER_SPECIAL = "[\\\\/:\\*\\?\\\"<>\\|]";
 
 
     /**
