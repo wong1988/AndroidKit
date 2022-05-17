@@ -102,4 +102,33 @@ public class StringUtils {
 
         return stringInfo;
     }
+
+    /**
+     * 去除字符串首尾空格（全角 & 半角）
+     */
+    public static String trim(String s) {
+
+        if (TextUtils.isEmpty(s))
+            return "";
+
+        // 转换成字符
+        char[] val = s.toCharArray();
+
+        // 默认截取全部
+        int st = 0;
+        int len = val.length;
+
+        // 全角空格 Unicode编码 12288
+        // 半角空格 Unicode编码 32
+        while ((st < len) && (val[st] <= 32) || val[st] == 12288) {
+            st++;
+        }
+
+        while ((st < len) && (val[len - 1] <= 32 || val[len - 1] == 12288)) {
+            len--;
+        }
+
+        return ((st > 0) || (len < val.length)) ? s.substring(st, len) : s;
+    }
+
 }
