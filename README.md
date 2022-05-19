@@ -25,6 +25,8 @@ AndroidKit.init(application);
 
 ### UiUtils(Ui相关工具类) | [查看使用方式](https://github.com/wong1988/AndroidKit/blob/main/UiUtils-README.md)
 
+### EditTextUtils(输入框相关工具类) | [查看使用方式](https://github.com/wong1988/AndroidKit/blob/main/EditTextUtils-README.md)
+
 ### 原生定位 | [查看使用方式](https://github.com/wong1988/AndroidKit/blob/main/原生定位-README.md)
 
 
