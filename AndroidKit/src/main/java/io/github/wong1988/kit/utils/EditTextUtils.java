@@ -50,7 +50,7 @@ public class EditTextUtils {
     public static void setCashFilter(EditText editText, CashierListener listener) {
 
         // 仅可输入,否则粘贴的内容不符合条件，需按返回才可隐藏粘贴弹窗
-        onlyEdit(editText);
+//        onlyEdit(editText);
         // 限制输入数字和.
         editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         // 过滤器
@@ -63,7 +63,7 @@ public class EditTextUtils {
     public static void setCashFilter(EditText editText, String MAX_VALUE, CashierListener listener) {
 
         // 仅可输入,否则粘贴的内容不符合条件，需按返回才可隐藏粘贴弹窗
-        onlyEdit(editText);
+//        onlyEdit(editText);
         // 限制输入数字和.
         editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         // 过滤器
