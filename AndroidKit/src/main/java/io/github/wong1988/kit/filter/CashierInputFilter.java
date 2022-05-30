@@ -31,7 +31,7 @@ public class CashierInputFilter implements InputFilter {
     private String MAX_VALUE_FILL = "";
 
     public CashierInputFilter(CashierListener listener) {
-        mPattern = Pattern.compile("([0-9]|\\.)*");
+        mPattern = Pattern.compile("^[0-9]*\\.?[0-9]*$");
         this.mListener = listener;
     }
 
@@ -120,6 +120,7 @@ public class CashierInputFilter implements InputFilter {
                 // 需要验证金额
                 BigDecimal sumText = new BigDecimal(sumTextStr);
 
+
                 if (MAX_VALUE == null) {
                     if (mListener != null)
                         mListener.correct(sumText.toString(), new DecimalFormat("0.00#").format(sumText));
@@ -140,34 +141,29 @@ public class CashierInputFilter implements InputFilter {
         }
 
 
-        // 添加操作
+        // 拼接
+        String sumTextStr;
+        // 返回的内容
+        String returnText = sourceText;
+
+        // 添加操作或替换操作
         Matcher matcher = mPattern.matcher(source);
         // 不符合正则表达式
         if (!matcher.matches()) {
-            return "";
+            // 替换或输入的字符串不合规
+            sourceText = "";
+            returnText = "";
         }
 
-
-        // 拼接
-        String sumTextStr;
-
-        String returnText = sourceText;
-
+        // 上方已经拦截了删除的情况，只要不相等就认为是替换了
         if (dstart != dend) {
+
             // 替换操作
 
+            // 如：原文 123.56 要替换的内容56 替换的内容2.2 不符合规则  上方正则只验证了替换的内容只允许有一个.
             if (destText.contains(POINTER) && sourceText.contains(POINTER) && !destText.substring(dstart, dend).contains(POINTER)) {
                 sourceText = "";
-            }
-
-            if (sourceText.contains(POINTER)) {
-                // 验证有几个小数点
-
-                if (sourceText.indexOf(POINTER) != sourceText.lastIndexOf(POINTER)) {
-                    // 多个小数点
-                    sourceText = "";
-                    returnText = "";
-                }
+                returnText = "";
             }
 
             if (dstart == 0) {
@@ -181,21 +177,16 @@ public class CashierInputFilter implements InputFilter {
                 sumTextStr = (destText.substring(0, dstart) + sourceText + destText.substring(dend));
             }
 
-            if (sumTextStr.contains(POINTER)) {
-                // 仅一个小数点
-                if (dstart == 0 && sumTextStr.startsWith(POINTER))
-                    returnText = "0" + sourceText;
-            }
-
-            if (TextUtils.isEmpty(sumTextStr)) {
-                // 全部替换并且替换的内容也不对，导致为空
-                if (mListener != null)
-                    mListener.correct("", "0.00");
-                return "";
-            }
-
         } else {
+
             // 添加操作
+
+            // 如：原文 123.56 添加的内容2.2 不符合规则  上方正则只验证了替换的内容只允许有一个.
+            if (destText.contains(POINTER) && sourceText.contains(POINTER)) {
+                sourceText = "";
+                returnText = "";
+            }
+
             if (dstart == 0) {
                 // 首位添加
                 sumTextStr = sourceText + destText;
@@ -206,24 +197,24 @@ public class CashierInputFilter implements InputFilter {
                 // 中间添加
                 sumTextStr = (destText.substring(0, dstart) + sourceText + destText.substring(dstart));
             }
-
-            if (sumTextStr.contains(POINTER)) {
-                // 有小数点
-                if (sumTextStr.indexOf(POINTER) == sumTextStr.lastIndexOf(POINTER)) {
-                    // 仅一个小数点
-                    if (dstart == 0 && sumTextStr.startsWith(POINTER))
-                        returnText = "0" + sourceText;
-                } else {
-                    // 多个小数点
-                    return "";
-                }
-            }
         }
 
+        if (TextUtils.isEmpty(sumTextStr)) {
+            // 如 123 要替换的内容123 替换成abc 组装成的字符串为空
+            // 如 空字符串 添加abc 组装成的字符串为空
+            if (mListener != null)
+                mListener.correct("", ZERO_POINT);
+            return "";
+        }
 
-        if (sumTextStr.startsWith(POINTER))
+        // .xx这种情况需要补0
+        if (sumTextStr.startsWith(POINTER)) {
+            returnText = ZERO + sourceText;
+            // 防止转换BigDecimal报错
             sumTextStr = ZERO + sumTextStr;
+        }
 
+        // 如 10.555 只截取正确的，并在监听里进行重新设置setText()
         if (sumTextStr.contains(POINTER) && sumTextStr.indexOf(POINTER) + 3 < sumTextStr.length())
             sumTextStr = sumTextStr.substring(0, sumTextStr.indexOf(POINTER) + 3);
 
