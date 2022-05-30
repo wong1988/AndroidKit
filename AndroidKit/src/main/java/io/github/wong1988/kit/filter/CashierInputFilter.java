@@ -3,6 +3,7 @@ package io.github.wong1988.kit.filter;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -18,8 +19,8 @@ public class CashierInputFilter implements InputFilter {
 
     // 输入的最大金额
     private BigDecimal MAX_VALUE;
-    // 小数点后的位数
-    private static final int POINTER_LENGTH = 2;
+    // Zero
+    private static final String ZERO_POINT = "0.00";
 
     private static final String POINTER = ".";
 
@@ -52,7 +53,7 @@ public class CashierInputFilter implements InputFilter {
     /**
      * @param source 新输入的字符串
      * @param start  新输入的字符串起始下标，一般为0
-     * @param end    新输入的字符串终点下标，一般为source长度-1
+     * @param end    新输入的字符串终点下标，一般为start+source长度
      * @param dest   输入之前文本框内容
      * @param dstart 要替换或者添加的起始位置，即光标所在的位置
      * @param dend   原内容终点坐标，若为选择一串字符串进行更改，则为选中字符串 最后一个字符在dest中的位置。
@@ -61,29 +62,30 @@ public class CashierInputFilter implements InputFilter {
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
 
+        Log.e("ddd", "source:" + source + " start:" + start + " end:" + end + " dest:" + dest + " dstart:" + dstart + " dend:" + dend);
+
         // 新输入的字符串[键盘输入(char)、setText()的内容]
         String sourceText = source.toString();
         // 输入前的字符串
         String destText = dest.toString();
 
         if (TextUtils.isEmpty(sourceText) && TextUtils.isEmpty(destText)) {
-            // 用户调用的setText() 输入前的字符串会返回""
+            // 用户调用的setText("")
             if (mListener != null)
-                mListener.correct("", "0.00");
-
+                mListener.correct("", ZERO_POINT);
             return "";
         }
 
         // 删除操作
         if (TextUtils.isEmpty(sourceText) && dend > dstart) {
 
+            String returnText = "";
+
             if (dend - dstart == destText.length()) {
 
                 // 全部清空
                 if (mListener != null)
-                    mListener.correct("", "0.00");
-
-                return "";
+                    mListener.correct("", ZERO_POINT);
 
             } else {
 
@@ -93,16 +95,26 @@ public class CashierInputFilter implements InputFilter {
                 if (dend >= destText.length()) {
                     // 从末尾进行删除
                     sumTextStr = destText.substring(0, dstart);
+                } else if (dstart == 0) {
+                    // 从开始进行删除
+                    sumTextStr = destText.substring(dend);
                 } else {
+                    // 中间删除
+                    sumTextStr = destText.substring(0, dstart) + destText.substring(dend);
+                }
 
-                    if (dstart == 0) {
-                        // 从开始进行删除
-                        sumTextStr = destText.substring(dend);
-                    } else {
-                        // 中间删除
-                        sumTextStr = destText.substring(0, dstart) + destText.substring(dend);
-                    }
+                //.(需要注意删除只剩下点的情况) ""(此种情况上方if条件会拦截)
+                if (sumTextStr.length() == 1 && sumTextStr.contains(POINTER)) {
+                    returnText = ZERO;
+                    // 防止转换BigDecimal报错
+                    sumTextStr = ZERO + sumTextStr;
+                }
 
+                // .xx这种情况需要补0
+                if (sumTextStr.startsWith(POINTER)) {
+                    returnText = ZERO;
+                    // 防止转换BigDecimal报错
+                    sumTextStr = ZERO + sumTextStr;
                 }
 
                 // 需要验证金额
@@ -122,9 +134,9 @@ public class CashierInputFilter implements InputFilter {
                             mListener.correct(sumText.toString(), new DecimalFormat("0.00#").format(sumText));
                     }
                 }
-
-                return sumTextStr.startsWith(POINTER) ? "0" : "";
             }
+
+            return returnText;
         }
 
 
