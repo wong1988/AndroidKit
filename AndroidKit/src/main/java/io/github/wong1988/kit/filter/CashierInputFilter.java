@@ -127,38 +127,45 @@ public class CashierInputFilter implements InputFilter {
             }
         }
 
+
+        // 添加操作
         Matcher matcher = mPattern.matcher(source);
         // 不符合正则表达式
         if (!matcher.matches()) {
             return "";
         }
-        // 已经输入小数点的情况下，只能输入数字
-        if (destText.contains(POINTER)) {
 
-            if (sourceText.equals(POINTER)) {  //只能输入一个小数点
-                return "";
-            }
 
-            // 验证小数点精度，保证小数点后只能输入两位
-            int pointIndex = destText.indexOf(POINTER);
+        // 拼接
+        String sumTextStr;
 
-            if (dend - pointIndex > POINTER_LENGTH) {
-                return "";
-            }
+        if (dstart == 0) {
+            // 首位添加
+            sumTextStr = sourceText + destText;
+        } else if (dstart == destText.length()) {
+            // 末尾添加
+            sumTextStr = destText + sourceText;
         } else {
-            // 没有输入小数点的情况下，只能输入小数点和数字，但首位不能输入小数点
-            if (dstart == 0 && sourceText.equals(POINTER)) {
-                return "";
-            }
-            // 没有输入小数点的情况下，首位是0只能输入小数点
-            if (destText.equals(ZERO) && !sourceText.equals(POINTER)) {
+            // 中间添加
+            sumTextStr = (destText.substring(0, dstart) + sourceText + destText.substring(dstart));
+        }
+
+        String returnText = sourceText;
+
+        if (sumTextStr.contains(".")) {
+            // 有小数点
+            if (sumTextStr.indexOf(".") == sumTextStr.lastIndexOf(".")) {
+                // 仅一个小数点
+                if (dstart == 0 && sumTextStr.startsWith("."))
+                    returnText = "0" + sourceText;
+            } else {
+                // 多个小数点
                 return "";
             }
         }
 
-
         // 验证输入金额的大小
-        BigDecimal sumText = new BigDecimal(destText + sourceText);
+        BigDecimal sumText = new BigDecimal(sumTextStr);
 
         if (MAX_VALUE == null) {
             if (mListener != null)
@@ -175,6 +182,6 @@ public class CashierInputFilter implements InputFilter {
             }
         }
 
-        return sourceText;
+        return returnText;
     }
 }
