@@ -123,7 +123,7 @@ public class CashierInputFilter implements InputFilter {
                     }
                 }
 
-                return sumTextStr.startsWith(".") ? "0" : "";
+                return sumTextStr.startsWith(POINTER) ? "0" : "";
             }
         }
 
@@ -139,30 +139,81 @@ public class CashierInputFilter implements InputFilter {
         // 拼接
         String sumTextStr;
 
-        if (dstart == 0) {
-            // 首位添加
-            sumTextStr = sourceText + destText;
-        } else if (dstart == destText.length()) {
-            // 末尾添加
-            sumTextStr = destText + sourceText;
-        } else {
-            // 中间添加
-            sumTextStr = (destText.substring(0, dstart) + sourceText + destText.substring(dstart));
-        }
-
         String returnText = sourceText;
 
-        if (sumTextStr.contains(".")) {
-            // 有小数点
-            if (sumTextStr.indexOf(".") == sumTextStr.lastIndexOf(".")) {
-                // 仅一个小数点
-                if (dstart == 0 && sumTextStr.startsWith("."))
-                    returnText = "0" + sourceText;
+        if (dstart != dend) {
+            // 替换操作
+
+            if (destText.contains(POINTER) && sourceText.contains(POINTER) && !destText.substring(dstart, dend).contains(POINTER)) {
+                sourceText = "";
+            }
+
+            if (sourceText.contains(POINTER)) {
+                // 验证有几个小数点
+
+                if (sourceText.indexOf(POINTER) != sourceText.lastIndexOf(POINTER)) {
+                    // 多个小数点
+                    sourceText = "";
+                    returnText = "";
+                }
+            }
+
+            if (dstart == 0) {
+                // 首位开始替换
+                sumTextStr = sourceText + destText.substring(dend);
+            } else if (dstart == destText.length()) {
+                // 末尾替换
+                sumTextStr = destText.substring(0, dend) + sourceText;
             } else {
-                // 多个小数点
+                // 中间替换
+                sumTextStr = (destText.substring(0, dstart) + sourceText + destText.substring(dend));
+            }
+
+            if (sumTextStr.contains(POINTER)) {
+                // 仅一个小数点
+                if (dstart == 0 && sumTextStr.startsWith(POINTER))
+                    returnText = "0" + sourceText;
+            }
+
+            if (TextUtils.isEmpty(sumTextStr)) {
+                // 全部替换并且替换的内容也不对，导致为空
+                if (mListener != null)
+                    mListener.correct("", "0.00");
                 return "";
             }
+
+        } else {
+            // 添加操作
+            if (dstart == 0) {
+                // 首位添加
+                sumTextStr = sourceText + destText;
+            } else if (dstart == destText.length()) {
+                // 末尾添加
+                sumTextStr = destText + sourceText;
+            } else {
+                // 中间添加
+                sumTextStr = (destText.substring(0, dstart) + sourceText + destText.substring(dstart));
+            }
+
+            if (sumTextStr.contains(POINTER)) {
+                // 有小数点
+                if (sumTextStr.indexOf(POINTER) == sumTextStr.lastIndexOf(POINTER)) {
+                    // 仅一个小数点
+                    if (dstart == 0 && sumTextStr.startsWith(POINTER))
+                        returnText = "0" + sourceText;
+                } else {
+                    // 多个小数点
+                    return "";
+                }
+            }
         }
+
+
+        if (sumTextStr.startsWith(POINTER))
+            sumTextStr = ZERO + sumTextStr;
+
+        if (sumTextStr.contains(POINTER) && sumTextStr.indexOf(POINTER) + 3 < sumTextStr.length())
+            sumTextStr = sumTextStr.substring(0, sumTextStr.indexOf(POINTER) + 3);
 
         // 验证输入金额的大小
         BigDecimal sumText = new BigDecimal(sumTextStr);
@@ -184,4 +235,5 @@ public class CashierInputFilter implements InputFilter {
 
         return returnText;
     }
+
 }
