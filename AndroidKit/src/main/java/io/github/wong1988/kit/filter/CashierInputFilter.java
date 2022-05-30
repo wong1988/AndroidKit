@@ -77,15 +77,36 @@ public class CashierInputFilter implements InputFilter {
         // 删除操作
         if (TextUtils.isEmpty(sourceText) && dend > dstart) {
 
-            // 全部清空
-            if (dend == 1) {
+            if (dend - dstart == destText.length()) {
 
+                // 全部清空
                 if (mListener != null)
                     mListener.correct("", "0.00");
 
+                return "";
+
             } else {
+
                 // 需要验证金额
-                BigDecimal sumText = new BigDecimal(destText.substring(0, dstart));
+                String sumTextStr;
+
+                if (dend >= destText.length()) {
+                    // 从末尾进行删除
+                    sumTextStr = destText.substring(0, dstart);
+                } else {
+
+                    if (dstart == 0) {
+                        // 从开始进行删除
+                        sumTextStr = destText.substring(dend);
+                    } else {
+                        // 中间删除
+                        sumTextStr = destText.substring(0, dstart) + destText.substring(dend);
+                    }
+
+                }
+
+                // 需要验证金额
+                BigDecimal sumText = new BigDecimal(sumTextStr);
 
                 if (MAX_VALUE == null) {
                     if (mListener != null)
@@ -101,8 +122,9 @@ public class CashierInputFilter implements InputFilter {
                             mListener.correct(sumText.toString(), new DecimalFormat("0.00#").format(sumText));
                     }
                 }
+
+                return sumTextStr.startsWith(".") ? "0" : "";
             }
-            return "";
         }
 
         Matcher matcher = mPattern.matcher(source);
@@ -117,22 +139,23 @@ public class CashierInputFilter implements InputFilter {
                 return "";
             }
 
-            //验证小数点精度，保证小数点后只能输入两位
+            // 验证小数点精度，保证小数点后只能输入两位
             int pointIndex = destText.indexOf(POINTER);
 
             if (dend - pointIndex > POINTER_LENGTH) {
                 return "";
             }
         } else {
-            //没有输入小数点的情况下，只能输入小数点和数字，但首位不能输入小数点
+            // 没有输入小数点的情况下，只能输入小数点和数字，但首位不能输入小数点
             if (dstart == 0 && sourceText.equals(POINTER)) {
                 return "";
             }
-            //没有输入小数点的情况下，首位是0只能输入小数点
+            // 没有输入小数点的情况下，首位是0只能输入小数点
             if (destText.equals(ZERO) && !sourceText.equals(POINTER)) {
                 return "";
             }
         }
+
 
         // 验证输入金额的大小
         BigDecimal sumText = new BigDecimal(destText + sourceText);
