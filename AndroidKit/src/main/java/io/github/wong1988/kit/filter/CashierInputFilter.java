@@ -92,6 +92,7 @@ public class CashierInputFilter implements InputFilter {
         }
 
         // 删除操作
+        // 选中粘贴空的也认为是删除操作
         if (TextUtils.isEmpty(sourceText) && dend > dstart) {
 
             // 可能有需要补0的情况
@@ -168,7 +169,7 @@ public class CashierInputFilter implements InputFilter {
 
             // 替换操作
 
-            // 如：原文 123.56 要替换的内容56 替换的内容2.2 不符合规则  上方正则只验证了替换的内容只允许有一个.
+            // 如：原文 123.56 要替换的内容56 替换的内容2.2 不符合规则  上方正则只验证了替换的内容只允许有一个. 不允许出现两个.
             if (destText.contains(POINTER) && sourceText.contains(POINTER) && !destText.substring(dstart, dend).contains(POINTER)) {
                 sourceText = "";
                 returnText = "";
@@ -187,9 +188,9 @@ public class CashierInputFilter implements InputFilter {
 
         } else {
 
-            // 添加操作
+            // 添加操作，直接粘贴空的也认为是追加操作
 
-            // 如：原文 123.56 添加的内容2.2 不符合规则  上方正则只验证了替换的内容只允许有一个.
+            // 如：原文 123.56 添加的内容2.2 不符合规则  上方正则只验证了替换的内容只允许有一个. 不允许出现两个.
             if (destText.contains(POINTER) && sourceText.contains(POINTER)) {
                 sourceText = "";
                 returnText = "";
@@ -216,13 +217,15 @@ public class CashierInputFilter implements InputFilter {
         }
 
         // .xx这种情况需要补0
+        // 如 添加操作 首位直接输入.
+        // 如 替换操作 首位开始替换成. 首位开始粘贴空字符到.[响应到删除操作]
         if (sumTextStr.startsWith(POINTER)) {
             returnText = ZERO + sourceText;
             // 防止转换BigDecimal报错
             sumTextStr = ZERO + sumTextStr;
         }
 
-        // 如 10.555 只截取正确的，并在监听里进行重新设置setText()
+        // 如 10.555 只截取正确的，并在Edittext监听里进行重新设置setText()
         if (sumTextStr.contains(POINTER) && sumTextStr.indexOf(POINTER) + 3 < sumTextStr.length())
             sumTextStr = sumTextStr.substring(0, sumTextStr.indexOf(POINTER) + 3);
 
