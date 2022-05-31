@@ -40,11 +40,26 @@ public class CashierInputFilter implements InputFilter {
      */
     public CashierInputFilter(String MAX_VALUE, CashierListener listener) {
         this(listener);
-        // 如果最大值错误 会自动报异常
-        this.MAX_VALUE = new BigDecimal(MAX_VALUE);
 
-        if (this.MAX_VALUE.toString().substring(this.MAX_VALUE.toString().indexOf(".")).length() > 3) {
+        if (TextUtils.isEmpty(MAX_VALUE)) {
+            throw new RuntimeException("最大值不能为空或调用一参的构造方法");
+        }
+
+        Matcher matcher = mPattern.matcher(MAX_VALUE);
+        // 不符合正则表达式
+        if (!matcher.matches()) {
+            throw new RuntimeException("最大值仅允许数字且.小于等于1个");
+        }
+
+        if (MAX_VALUE.contains(POINTER) && MAX_VALUE.length() - MAX_VALUE.lastIndexOf(POINTER) > 3) {
             throw new RuntimeException("最大值仅支持两位小数");
+        }
+
+        try {
+            // 如果最大值错误 会自动报异常
+            this.MAX_VALUE = new BigDecimal(MAX_VALUE);
+        } catch (Exception e) {
+            throw new RuntimeException("请检查最大值是否正确");
         }
 
         this.MAX_VALUE_FILL = new DecimalFormat("0.00#").format(this.MAX_VALUE);
