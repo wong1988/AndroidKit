@@ -150,27 +150,22 @@ public class CashierInputFilter implements InputFilter {
         // 拼接
         String sumTextStr;
         // 返回的内容
-        String returnText = sourceText;
+        String returnText;
 
-        // 添加操作或替换操作
-        Matcher matcher = mPattern.matcher(source);
-        // 不符合正则表达式
-        if (!matcher.matches()) {
-            // 替换或输入的字符串不合规
-            sourceText = "";
-            returnText = "";
-        }
 
         // 上方已经拦截了删除的情况，只要不相等就认为是替换了
         if (dstart != dend) {
 
             // 替换操作
 
-            // 如：原文 123.56 要替换的内容56 替换的内容2.2 不符合规则  上方正则只验证了替换的内容只允许有一个. 不允许出现两个.
+            // 如：原文 123.56 要替换的内容56 替换的内容2.2 替换的内容不允许出现.
             if (destText.contains(POINTER) && sourceText.contains(POINTER) && !destText.substring(dstart, dend).contains(POINTER)) {
-                sourceText = "";
-                returnText = "";
+                sourceText = correctString(sourceText, 0);
+            } else {
+                sourceText = correctString(sourceText, 1);
             }
+
+            returnText = sourceText;
 
             if (dstart == 0) {
                 // 首位开始替换
@@ -187,11 +182,14 @@ public class CashierInputFilter implements InputFilter {
 
             // 添加操作，直接粘贴空的也认为是追加操作
 
-            // 如：原文 123.56 添加的内容2.2 不符合规则  上方正则只验证了替换的内容只允许有一个. 不允许出现两个.
-            if (destText.contains(POINTER) && sourceText.contains(POINTER)) {
-                sourceText = "";
-                returnText = "";
+            // 如：原文 123.56 添加的内容2.2 添加的那日容不允许出现.
+            if (destText.contains(POINTER)) {
+                sourceText = correctString(sourceText, 0);
+            } else {
+                sourceText = correctString(sourceText, 1);
             }
+
+            returnText = sourceText;
 
             if (dstart == 0) {
                 // 首位添加
@@ -247,4 +245,28 @@ public class CashierInputFilter implements InputFilter {
         return returnText;
     }
 
+
+    /**
+     * 返回正确可用内容
+     */
+    private String correctString(String s, int maxDot) {
+
+        if (TextUtils.isEmpty(s))
+            return "";
+
+        StringBuilder builder = new StringBuilder();
+
+        char[] chars = s.toCharArray();
+
+        for (char aChar : chars) {
+            if (Character.isDigit(aChar)) {
+                builder.append(aChar);
+            } else if (maxDot > 0 && aChar == '.') {
+                builder.append(aChar);
+                maxDot--;
+            }
+        }
+
+        return builder.toString();
+    }
 }
