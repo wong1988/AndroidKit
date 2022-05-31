@@ -77,15 +77,15 @@ public class CashierInputFilter implements InputFilter {
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
 
-        Log.e("ddd", "source:" + source + " start:" + start + " end:" + end + " dest:" + dest + " dstart:" + dstart + " dend:" + dend);
+        Log.e("ddd", "source:" + source + " dest:" + dest + " dstart:" + dstart + " dend:" + dend);
 
-        // 新输入的字符串[键盘输入(char)、setText()的内容]
+        // 新输入的字符串[键盘输入(char)、setText()的内容、粘贴的内容]
         String sourceText = source.toString();
         // 输入前的字符串
         String destText = dest.toString();
 
         if (TextUtils.isEmpty(sourceText) && TextUtils.isEmpty(destText)) {
-            // 用户调用的setText("")
+            // 用户调用的setText("")做特殊处理
             if (mListener != null)
                 mListener.correct("", ZERO_POINT);
             return "";
