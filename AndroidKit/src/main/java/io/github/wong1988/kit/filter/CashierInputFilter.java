@@ -94,6 +94,7 @@ public class CashierInputFilter implements InputFilter {
         // 删除操作
         if (TextUtils.isEmpty(sourceText) && dend > dstart) {
 
+            // 可能有需要补0的情况
             String returnText = "";
 
             if (dend - dstart == destText.length()) {
@@ -118,13 +119,6 @@ public class CashierInputFilter implements InputFilter {
                     sumTextStr = destText.substring(0, dstart) + destText.substring(dend);
                 }
 
-                //.(需要注意删除只剩下点的情况) ""(此种情况上方if条件会拦截)
-                if (sumTextStr.length() == 1 && sumTextStr.contains(POINTER)) {
-                    returnText = ZERO;
-                    // 防止转换BigDecimal报错
-                    sumTextStr = ZERO + sumTextStr;
-                }
-
                 // .xx这种情况需要补0
                 if (sumTextStr.startsWith(POINTER)) {
                     returnText = ZERO;
@@ -132,9 +126,8 @@ public class CashierInputFilter implements InputFilter {
                     sumTextStr = ZERO + sumTextStr;
                 }
 
-                // 需要验证金额
+                // 需要验证金额，主要是最大值验证，金额格式肯定会正确，进行了补0 或者 if拦截了""
                 BigDecimal sumText = new BigDecimal(sumTextStr);
-
 
                 if (MAX_VALUE == null) {
                     if (mListener != null)
