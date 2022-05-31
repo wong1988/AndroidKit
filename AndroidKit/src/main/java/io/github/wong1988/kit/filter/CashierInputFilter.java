@@ -3,7 +3,6 @@ package io.github.wong1988.kit.filter;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -15,7 +14,7 @@ import java.util.regex.Pattern;
  */
 public class CashierInputFilter implements InputFilter {
 
-    Pattern mPattern;
+    private final Pattern mPattern;
 
     // 输入的最大金额
     private BigDecimal MAX_VALUE;
@@ -76,8 +75,6 @@ public class CashierInputFilter implements InputFilter {
      */
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-
-        Log.e("ddd", "source:" + source + " dest:" + dest + " dstart:" + dstart + " dend:" + dend);
 
         // 新输入的字符串[键盘输入(char)、setText()的内容、粘贴的内容]
         String sourceText = source.toString();
