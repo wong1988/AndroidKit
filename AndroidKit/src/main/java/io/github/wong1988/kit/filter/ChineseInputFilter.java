@@ -6,19 +6,10 @@ import android.text.TextUtils;
 
 import com.github.promeg.pinyinhelper.Pinyin;
 
-import java.util.regex.Pattern;
-
 /**
  * 汉字的过滤器
  */
 public class ChineseInputFilter implements InputFilter {
-
-
-    private final Pattern mPattern;
-
-    public ChineseInputFilter() {
-        mPattern = Pattern.compile("^[\\u4e00-\\u9fa5]{0,}$");
-    }
 
     /**
      * @param source 新输入的字符串
