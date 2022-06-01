@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import io.github.wong1988.kit.filter.CashierInputFilter;
 import io.github.wong1988.kit.filter.CashierListener;
+import io.github.wong1988.kit.filter.ChineseInputFilter;
 
 public class EditTextUtils {
 
@@ -60,5 +61,15 @@ public class EditTextUtils {
         inputFilter[0] = new CashierInputFilter(MAX_VALUE, listener);
         editText.setFilters(inputFilter);
 
+    }
+
+    /**
+     * 设置只能输入汉字
+     */
+    public static void setChineseFilter(EditText editText) {
+        // 过滤器
+        InputFilter[] inputFilter = new InputFilter[1];
+        inputFilter[0] = new ChineseInputFilter();
+        editText.setFilters(inputFilter);
     }
 }

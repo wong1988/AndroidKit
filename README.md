@@ -32,6 +32,10 @@ AndroidKit.init(application);
 
 ## Change Log
 
+1.0.6:
+
+ * 加入了Edittext输入现金格式以及汉字格式
+
 1.0.2:
 
  * 加入了gson序列化、反序列化的处理，String = null 处理成“”  List = null 处理成 []，详细可查看使用demo
