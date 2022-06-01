@@ -4,7 +4,8 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 
-import java.util.regex.Matcher;
+import com.github.promeg.pinyinhelper.Pinyin;
+
 import java.util.regex.Pattern;
 
 /**
@@ -49,18 +50,20 @@ public class ChineseInputFilter implements InputFilter {
         }
 
 
-        // 返回的内容
-        String returnText = sourceText;
+        // 添加 替换 操作
+        if (TextUtils.isEmpty(sourceText))
+            return "";
 
-        // 添加操作或替换操作
-        Matcher matcher = mPattern.matcher(source);
-        // 不符合正则表达式
-        if (!matcher.matches()) {
-            // 替换或输入的字符串不合规
-            returnText = "";
+        StringBuilder builder = new StringBuilder();
+
+        char[] chars = sourceText.toCharArray();
+
+        for (char aChar : chars) {
+            if (Pinyin.isChinese(aChar))
+                builder.append(aChar);
         }
 
-        return returnText;
+        return builder.toString();
     }
 
 }
