@@ -160,9 +160,9 @@ public class CashierInputFilter implements InputFilter {
 
             // 如：原文 123.56 要替换的内容56 替换的内容2.2 替换的内容不允许出现.
             if (destText.contains(POINTER) && sourceText.contains(POINTER) && !destText.substring(dstart, dend).contains(POINTER)) {
-                sourceText = correctString(sourceText, 0);
+                sourceText = correctString(sourceText, false);
             } else {
-                sourceText = correctString(sourceText, 1);
+                sourceText = correctString(sourceText, true);
             }
 
             returnText = sourceText;
@@ -184,9 +184,9 @@ public class CashierInputFilter implements InputFilter {
 
             // 如：原文 123.56 添加的内容2.2 添加的那日容不允许出现.
             if (destText.contains(POINTER)) {
-                sourceText = correctString(sourceText, 0);
+                sourceText = correctString(sourceText, false);
             } else {
-                sourceText = correctString(sourceText, 1);
+                sourceText = correctString(sourceText, true);
             }
 
             returnText = sourceText;
@@ -249,21 +249,35 @@ public class CashierInputFilter implements InputFilter {
     /**
      * 返回正确可用内容
      */
-    private String correctString(String s, int maxDot) {
+    private String correctString(String s, boolean canDot) {
 
         if (TextUtils.isEmpty(s))
             return "";
+
+        // 如果.有多个的话，只留最后一个
+        int saveDotIndex = -1;
+
+        if (canDot) {
+            // 首次出现.
+            int indexOf = s.indexOf(POINTER);
+            // 最后一次出现.
+            int lastIndexOf = s.lastIndexOf(POINTER);
+            if (s.contains(POINTER) && indexOf != lastIndexOf)
+                saveDotIndex = lastIndexOf;
+            else
+                saveDotIndex = indexOf;
+        }
 
         StringBuilder builder = new StringBuilder();
 
         char[] chars = s.toCharArray();
 
-        for (char aChar : chars) {
+        for (int i = 0; i < chars.length; i++) {
+            char aChar = chars[i];
             if (Character.isDigit(aChar)) {
                 builder.append(aChar);
-            } else if (maxDot > 0 && aChar == '.') {
+            } else if (saveDotIndex == i) {
                 builder.append(aChar);
-                maxDot--;
             }
         }
 
