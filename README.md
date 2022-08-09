@@ -3,6 +3,7 @@
 Android开发工具包
 
 Step 1. Add it in your root build.gradle at the end of repositories:
+
 ```
 allprojects {
     repositories {
@@ -11,14 +12,18 @@ allprojects {
     }
 }
 ```
+
 Step 2. Add the dependency
+
 ```
 dependencies {
-    implementation 'com.github.wong1988:AndroidKit:1.0.7'
+    implementation 'com.github.wong1988:AndroidKit:1.0.9'
     implementation 'com.google.code.gson:gson:2.9.0'
 }
 ```
+
 Step 3. 在Application进行初始化
+
 ```
 AndroidKit.init(application);
 ```
@@ -29,17 +34,22 @@ AndroidKit.init(application);
 
 ### 原生定位 | [查看使用方式](https://github.com/wong1988/AndroidKit/blob/main/原生定位-README.md)
 
+### SpannableStringUtils(文字样式的工具类) | [查看使用方式](https://github.com/wong1988/AndroidKit/blob/main/SpannableStringUtils-README.md)
 
 ## Change Log
 
+1.0.9:
+
+* 加入了SpannableStringUtils可设置 图片 + 文字 ，文字自动换行到图片下方
+
 1.0.6:
 
- * 加入了Edittext输入现金格式以及汉字格式
+* 加入了Edittext输入现金格式以及汉字格式
 
 1.0.2:
 
- * 加入了gson序列化、反序列化的处理，String = null 处理成“”  List = null 处理成 []，详细可查看使用demo
+* 加入了gson序列化、反序列化的处理，String = null 处理成“” List = null 处理成 []，详细可查看使用demo
 
 1.0.1:
 
- * 首个版本发布
+* 首个版本发布

@@ -1,13 +1,17 @@
 # 原生定位
- Android提供的原生定位方式
 
- ## Method and Attribute
+Android提供的原生定位方式
+
+## Method and Attribute
 
 构造方法
+
 ```
 MapLocationClient()
 ```
+
 常用方法
+
 ```
 // 设置单次定位，默认否
 setOnceLocation()
@@ -21,13 +25,14 @@ stopLocation()
 ```
 
 监听器
+
 ```
 1. setLocationListener() 定位的回调监听
 ```
 
-
 ## About
 
 注意：
+
 1. 需要在清单文件进行申请权限 `<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />`
 2. 需要动态获取运行时权限 Manifest.permission.ACCESS_FINE_LOCATION 与 Manifest.permission.ACCESS_COARSE_LOCATION
