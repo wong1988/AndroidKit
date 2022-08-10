@@ -4,10 +4,6 @@
 
 ## Method
 
-图为 drawableMargin = false
-
-![](https://github.com/wong1988/AndroidKit/blob/main/image/01.png)
-
 ```
 // 直接设置 图片+文字
 drawableLeft()
@@ -15,6 +11,9 @@ drawableLeft()
 drawableLeftSpannableString()
 ```
 
-图为 drawableMargin = true
-
 ![](https://github.com/wong1988/AndroidKit/blob/main/image/01.png)
+图1 : drawableMargin = false
+
+
+![](https://github.com/wong1988/AndroidKit/blob/main/image/02.png)
+图2：rawableMargin = true
