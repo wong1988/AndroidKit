@@ -17,7 +17,7 @@ Step 2. Add the dependency
 
 ```
 dependencies {
-    implementation 'com.github.wong1988:AndroidKit:1.0.9'
+    implementation 'com.github.wong1988:AndroidKit:1.1.0'
     implementation 'com.google.code.gson:gson:2.9.0'
 }
 ```
@@ -38,9 +38,9 @@ AndroidKit.init(application);
 
 ## Change Log
 
-1.0.9:
+1.1.0:
 
-* 加入了SpannableStringUtils可设置 图片 + 文字 ，文字自动换行到图片下方
+* 加入了SpannableStringUtils，可设置 左侧图片 + 文字 排版方式
 
 1.0.6:
 

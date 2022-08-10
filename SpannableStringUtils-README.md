@@ -4,17 +4,17 @@
 
 ## Method
 
+图为 drawableMargin = false
+
+![](https://github.com/wong1988/AndroidKit/blob/main/image/01.png)
+
 ```
-// 效果 ⊙ （图片）+ 文字
-// ⊙ 我是文字，我很长，只能
-// 换行了
+// 直接设置 图片+文字
 drawableLeft()
+// 获取 图片+文字的构建器
+drawableLeftSpannableString()
 ```
 
-## About
+图为 drawableMargin = true
 
-注意：
-> 图标文字
-
-1. 图标的最大高度为单行文字所能绘制的顶部（Ǎ）与底部（g）之间的高度 + 自带padding（设置无系统分配的padding时值为0）
-2. 图标小于行高会进行垂直居中摆放（单行文字高度的居中）
+![](https://github.com/wong1988/AndroidKit/blob/main/image/01.png)
