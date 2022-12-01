@@ -25,4 +25,11 @@
         android:hint="请输入中文"
         android:maxLength="4" />
 
+    <EditText
+        android:id="@+id/maxLength"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="最大长度4"
+        android:maxLength="2" />
+
 </LinearLayout>

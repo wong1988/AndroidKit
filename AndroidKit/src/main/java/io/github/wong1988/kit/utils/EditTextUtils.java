@@ -6,9 +6,13 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.wong1988.kit.filter.CashierInputFilter;
 import io.github.wong1988.kit.filter.CashierListener;
 import io.github.wong1988.kit.filter.ChineseInputFilter;
+import io.github.wong1988.kit.type.InputFilterAddMode;
 
 public class EditTextUtils {
 
@@ -71,5 +75,33 @@ public class EditTextUtils {
         InputFilter[] inputFilter = new InputFilter[1];
         inputFilter[0] = new ChineseInputFilter();
         editText.setFilters(inputFilter);
+    }
+
+    /**
+     * 设置EditText可输入最大值的过滤
+     * mode = append 如果出现重复设置长度，系统会用重复的几个最大值里最小的进行限制
+     */
+    public static void setMaxLengthFilter(EditText editText, int max, InputFilterAddMode mode) {
+        switch (mode) {
+            case REPLACE:
+                editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(max)});
+                break;
+            case APPEND:
+                InputFilter[] filters = editText.getFilters();
+                InputFilter[] newFilters = ArrayUtils.copyArray(filters, filters.length + 1);
+                newFilters[newFilters.length - 1] = new InputFilter.LengthFilter(max);
+                editText.setFilters(newFilters);
+                break;
+            case APPEND_SUPER:
+                InputFilter[] filters1 = editText.getFilters();
+                List<InputFilter> temp = new ArrayList<>();
+                for (InputFilter inputFilter : filters1) {
+                    if (!(inputFilter instanceof InputFilter.LengthFilter))
+                        temp.add(inputFilter);
+                }
+                temp.add(new InputFilter.LengthFilter(max));
+                editText.setFilters(ArrayUtils.toArray(temp, new InputFilter[temp.size()]));
+                break;
+        }
     }
 }
