@@ -9,9 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidKit">
-        <activity
-            android:name=".activity.SpannableStringUtilsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode" />
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode">
@@ -21,12 +19,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.StringUtilsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode" />
+
         <activity
             android:name=".activity.GsonActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode" />
+
+        <activity
+            android:name=".activity.EditTextActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.SpannableStringUtilsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode" />
+
     </application>
 
 </manifest>

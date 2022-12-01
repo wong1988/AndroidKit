@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import io.github.kit.example.activity.EditTextActivity;
 import io.github.kit.example.activity.GsonActivity;
 import io.github.kit.example.activity.SpannableStringUtilsActivity;
 import io.github.kit.example.activity.StringUtilsActivity;
@@ -28,5 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void SpannableStringUtils(View view) {
         startActivity(new Intent(this, SpannableStringUtilsActivity.class));
+    }
+
+    public void EditTextUtils(View view) {
+        startActivity(new Intent(this, EditTextActivity.class));
     }
 }

@@ -28,6 +28,12 @@
             android:onClick="SpannableStringUtils"
             android:text="SpannableStringUtils" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="EditTextUtils"
+            android:text="EditTextUtils" />
+
     </LinearLayout>
 
 </ScrollView>
