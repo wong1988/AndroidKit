@@ -32,4 +32,10 @@
         android:hint="最大长度4"
         android:maxLength="2" />
 
+    <EditText
+        android:id="@+id/digits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="可输入abc" />
+
 </LinearLayout>

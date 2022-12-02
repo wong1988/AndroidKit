@@ -17,7 +17,7 @@ Step 2. Add the dependency
 
 ```
 dependencies {
-    implementation 'com.github.wong1988:AndroidKit:1.1.0'
+    implementation 'com.github.wong1988:AndroidKit:1.1.1'
     implementation 'com.google.code.gson:gson:2.9.0'
 }
 ```

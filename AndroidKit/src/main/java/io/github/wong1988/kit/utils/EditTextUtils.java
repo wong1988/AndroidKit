@@ -12,6 +12,7 @@ import java.util.List;
 import io.github.wong1988.kit.filter.CashierInputFilter;
 import io.github.wong1988.kit.filter.CashierListener;
 import io.github.wong1988.kit.filter.ChineseInputFilter;
+import io.github.wong1988.kit.filter.DigitsFilter;
 import io.github.wong1988.kit.type.InputFilterAddMode;
 
 public class EditTextUtils {
@@ -103,5 +104,60 @@ public class EditTextUtils {
                 editText.setFilters(ArrayUtils.toArray(temp, new InputFilter[temp.size()]));
                 break;
         }
+    }
+
+    /**
+     * 移除EditText长度限制的filter
+     */
+    public static void removeMaxLengthFilter(EditText editText) {
+        InputFilter[] filters = editText.getFilters();
+        List<InputFilter> temp = new ArrayList<>();
+        for (InputFilter inputFilter : filters) {
+            if (!(inputFilter instanceof InputFilter.LengthFilter))
+                temp.add(inputFilter);
+        }
+        editText.setFilters(ArrayUtils.toArray(temp, new InputFilter[temp.size()]));
+    }
+
+    /**
+     * 设置EditText可输入字符的过滤
+     * mode = append 如果出现重复设置字符过滤，系统会从重复的几个过滤器里取出都包含的字符进行限制
+     * 即 ：filter1 abc  filter2 bcd 即可以输入 bc  filter1 a filter2 b 即什么也不可输入
+     */
+    public static void setDigitsFilter(EditText editText, String digits, InputFilterAddMode mode) {
+        switch (mode) {
+            case REPLACE:
+                editText.setFilters(new InputFilter[]{new DigitsFilter(digits)});
+                break;
+            case APPEND:
+                InputFilter[] filters = editText.getFilters();
+                InputFilter[] newFilters = ArrayUtils.copyArray(filters, filters.length + 1);
+                newFilters[newFilters.length - 1] = new DigitsFilter(digits);
+                editText.setFilters(newFilters);
+                break;
+            case APPEND_SUPER:
+                InputFilter[] filters1 = editText.getFilters();
+                List<InputFilter> temp = new ArrayList<>();
+                for (InputFilter inputFilter : filters1) {
+                    if (!(inputFilter instanceof DigitsFilter))
+                        temp.add(inputFilter);
+                }
+                temp.add(new DigitsFilter(digits));
+                editText.setFilters(ArrayUtils.toArray(temp, new InputFilter[temp.size()]));
+                break;
+        }
+    }
+
+    /**
+     * 移除EditText字符限制的filter
+     */
+    public static void removeDigitsFilter(EditText editText) {
+        InputFilter[] filters = editText.getFilters();
+        List<InputFilter> temp = new ArrayList<>();
+        for (InputFilter inputFilter : filters) {
+            if (!(inputFilter instanceof DigitsFilter))
+                temp.add(inputFilter);
+        }
+        editText.setFilters(ArrayUtils.toArray(temp, new InputFilter[temp.size()]));
     }
 }

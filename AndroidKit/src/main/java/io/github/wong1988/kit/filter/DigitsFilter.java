@@ -102,4 +102,7 @@ public class DigitsFilter implements InputFilter {
         return mAllowedDigits.indexOf(c) != -1;
     }
 
+    public String getAllowedDigits() {
+        return mAllowedDigits;
+    }
 }
