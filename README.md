@@ -38,13 +38,17 @@ AndroidKit.init(application);
 
 ## Change Log
 
+1.1.1:
+
+* 加入了EditText添加移除长度、字符过滤器的功能
+
 1.1.0:
 
 * 加入了SpannableStringUtils，可设置 左侧图片 + 文字 排版方式
 
 1.0.6:
 
-* 加入了Edittext输入现金格式以及汉字格式
+* 加入了EditText输入现金格式以及汉字格式
 
 1.0.2:
 
