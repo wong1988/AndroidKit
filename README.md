@@ -19,7 +19,7 @@ Step 2. Add the dependency
 dependencies {
     implementation 'com.github.wong1988:AndroidKit:1.1.2'
     implementation 'com.google.code.gson:gson:2.9.0'
-    implementation 'com.github.wong1988:MediaCenter:[![](https://jitpack.io/v/wong1988/MediaCenter.svg)](https://jitpack.io/#wong1988/MediaCenter)'
+    implementation 'com.github.wong1988:MediaCenter: [![](https://jitpack.io/v/wong1988/MediaCenter.svg)](https://jitpack.io/#wong1988/MediaCenter)'
 }
 ```
 
