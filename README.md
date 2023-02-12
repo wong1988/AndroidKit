@@ -17,8 +17,9 @@ Step 2. Add the dependency
 
 ```
 dependencies {
-    implementation 'com.github.wong1988:AndroidKit:1.1.1'
+    implementation 'com.github.wong1988:AndroidKit:1.1.2'
     implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.github.wong1988:MediaCenter:[![](https://jitpack.io/v/wong1988/MediaCenter.svg)](https://jitpack.io/#wong1988/MediaCenter)'
 }
 ```
 
@@ -37,6 +38,10 @@ AndroidKit.init(application);
 ### SpannableStringUtils(文字样式的工具类) | [查看使用方式](https://github.com/wong1988/AndroidKit/blob/main/SpannableStringUtils-README.md)
 
 ## Change Log
+
+1.1.2:
+
+* 加入了搜索内部存储的功能
 
 1.1.1:
 
