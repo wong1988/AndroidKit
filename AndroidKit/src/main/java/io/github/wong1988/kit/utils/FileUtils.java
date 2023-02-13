@@ -20,13 +20,14 @@ public class FileUtils {
 
     /**
      * 搜索手机存储文件（指定扩展名）
+     * 只有 READ_EXTERNAL_STORAGE 时，apk文件不能搜索，所以需要读写权限都有
      *
      * @param extension       筛选扩展名          如：new String[]{".png",".jpg"}
      * @param sortColumn      根据列名排序        如：MediaStore.Files.FileColumns.DATE_MODIFIED 根据修改时间进行排序
      * @param sortMode        排序模式           如：升序、降序
      * @param changedListener 数据变动的监听器     如：apk图标以及描述都为子线程获取，如果有变动请单独刷新某个item
      */
-    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE})
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public static List<FileInfo> queryMediaStoreFiles(String[] extension, String sortColumn, SortMode sortMode, FileInfoChanged changedListener) {
 
         if (extension == null)
