@@ -34,6 +34,10 @@ public class FileInfo {
         this.changedListener = changedListener;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     public FileInfo(int index, String fileName, String filePath, long size, long time, int width, int height, FileUtils.FileInfoChanged changedListener) {
         this.index = index;
         this.fileName = fileName;
@@ -71,6 +75,9 @@ public class FileInfo {
 
     public String getDescribe() {
 
+        // 子线程获取
+        getFileType();
+
         if (describe == null)
             // 未获取过，先取默认值
             describe = Formatter.formatFileSize(AndroidKit.getInstance().getAppContext(), size) + "   " + DateFormat.format("yyyy年MM月dd日", time);
@@ -96,6 +103,8 @@ public class FileInfo {
     }
 
     public Drawable getApkThumbnail() {
+        // 子线程去处理
+        getFileType();
         return apkThumbnail;
     }
 
