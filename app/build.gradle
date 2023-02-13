@@ -40,4 +40,6 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'com.github.wong1988:MediaCenter:0.0.2'
+
+    implementation 'com.github.wong1988:MediaCenter:0.0.2'
 }

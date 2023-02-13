@@ -2,31 +2,39 @@ package io.github.wong1988.kit.task;
 
 import android.Manifest;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 
 import androidx.annotation.RequiresPermission;
 
 import java.util.List;
 
 import io.github.wong1988.kit.entity.FileInfo;
+import io.github.wong1988.kit.type.SortMode;
 import io.github.wong1988.kit.utils.FileUtils;
 
 public class FileAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
 
-    private final String[] mExtension;
-    private String mSort;
     private final IFileAsyncTask mTaskListener;
 
+    private final String mSortColumn;
+    private final SortMode mSortMode;
+    private final FileUtils.FileInfoChanged mChangedListener;
+
+
     @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE})
-    public FileAsyncTask(String[] extension, IFileAsyncTask taskListener) {
-        this.mExtension = extension;
+    public FileAsyncTask(FileUtils.FileInfoChanged changedListener, IFileAsyncTask taskListener) {
         this.mTaskListener = taskListener;
+        this.mSortColumn = MediaStore.Files.FileColumns.DATE_MODIFIED;
+        this.mSortMode = SortMode.DESC;
+        this.mChangedListener = changedListener;
     }
 
     @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE})
-    public FileAsyncTask(String[] extension, String sort, IFileAsyncTask taskListener) {
-        this.mExtension = extension;
-        this.mSort = sort;
+    public FileAsyncTask(String sortColumn, SortMode sortMode, FileUtils.FileInfoChanged changedListener, IFileAsyncTask taskListener) {
         this.mTaskListener = taskListener;
+        this.mSortColumn = sortColumn;
+        this.mSortMode = sortMode;
+        this.mChangedListener = changedListener;
     }
 
     @Override
@@ -38,11 +46,8 @@ public class FileAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
 
     @Override
     @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE})
-    protected List<FileInfo> doInBackground(String... strings) {
-        if (mSort == null)
-            return FileUtils.searchExternalFiles(mExtension);
-        else
-            return FileUtils.searchExternalFiles(mExtension, mSort);
+    protected List<FileInfo> doInBackground(String... extensions) {
+        return FileUtils.searchExternalFiles(extensions, mSortColumn, mSortMode, mChangedListener);
     }
 
     @Override
