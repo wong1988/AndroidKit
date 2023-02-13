@@ -5,7 +5,7 @@ import android.text.format.DateFormat;
 import android.text.format.Formatter;
 
 import io.github.wong1988.kit.AndroidKit;
-import io.github.wong1988.kit.task.FileApkDesAsyncTask;
+import io.github.wong1988.kit.task.FileApkInfoAsyncTask;
 import io.github.wong1988.kit.utils.FileUtils;
 import io.github.wong1988.media.MediaCenter;
 
@@ -78,6 +78,10 @@ public class FileInfo {
         return describe;
     }
 
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
     public MediaCenter.FileClassify getFileType() {
 
         if (fileType == null) {
@@ -85,7 +89,7 @@ public class FileInfo {
             fileType = MediaCenter.getMediaFileType(filePath).classify;
             if (fileType == MediaCenter.FileClassify.APK)
                 // apk进行特殊处理，处理完更新
-                new FileApkDesAsyncTask().execute(this);
+                new FileApkInfoAsyncTask().execute(this);
         }
 
         return fileType;
@@ -97,5 +101,9 @@ public class FileInfo {
 
     public void setApkThumbnail(Drawable apkThumbnail) {
         this.apkThumbnail = apkThumbnail;
+    }
+
+    public FileUtils.FileInfoChanged getChangedListener() {
+        return changedListener;
     }
 }
