@@ -1,8 +1,11 @@
 package io.github.wong1988.kit.entity;
 
+import android.Manifest;
 import android.graphics.drawable.Drawable;
 import android.text.format.DateFormat;
 import android.text.format.Formatter;
+
+import androidx.annotation.RequiresPermission;
 
 import io.github.wong1988.kit.AndroidKit;
 import io.github.wong1988.kit.task.FileApkInfoAsyncTask;
@@ -73,6 +76,7 @@ public class FileInfo {
         return height;
     }
 
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public String getDescribe() {
 
         // 子线程获取
@@ -89,6 +93,7 @@ public class FileInfo {
         this.describe = describe;
     }
 
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public MediaCenter.FileClassify getFileType() {
 
         if (fileType == null) {
@@ -102,6 +107,7 @@ public class FileInfo {
         return fileType;
     }
 
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public Drawable getApkThumbnail() {
         // 子线程去处理
         getFileType();
