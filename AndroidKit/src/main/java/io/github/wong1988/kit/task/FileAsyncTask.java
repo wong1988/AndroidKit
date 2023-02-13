@@ -47,7 +47,7 @@ public class FileAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
     @Override
     @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE})
     protected List<FileInfo> doInBackground(String... extensions) {
-        return FileUtils.searchExternalFiles(extensions, mSortColumn, mSortMode, mChangedListener);
+        return FileUtils.queryMediaStoreFiles(extensions, mSortColumn, mSortMode, mChangedListener);
     }
 
     @Override

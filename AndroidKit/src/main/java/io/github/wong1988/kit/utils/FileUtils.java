@@ -27,7 +27,7 @@ public class FileUtils {
      * @param changedListener 数据变动的监听器     如：apk图标以及描述都为子线程获取，如果有变动请单独刷新某个item
      */
     @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE})
-    public static List<FileInfo> searchExternalFiles(String[] extension, String sortColumn, SortMode sortMode, FileInfoChanged changedListener) {
+    public static List<FileInfo> queryMediaStoreFiles(String[] extension, String sortColumn, SortMode sortMode, FileInfoChanged changedListener) {
 
         if (extension == null)
             extension = new String[0];
