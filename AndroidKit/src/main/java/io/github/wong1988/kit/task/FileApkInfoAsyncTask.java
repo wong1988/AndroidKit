@@ -1,11 +1,14 @@
 package io.github.wong1988.kit.task;
 
+import android.Manifest;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.format.Formatter;
+
+import androidx.annotation.RequiresPermission;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,14 @@ import io.github.wong1988.kit.R;
 import io.github.wong1988.kit.entity.FileInfo;
 import io.github.wong1988.kit.utils.FileUtils;
 
+/**
+ * 必须有写的权限才能解析apk,读的权限=null
+ */
 public class FileApkInfoAsyncTask extends AsyncTask<FileInfo, Integer, List<FileInfo>> {
+
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    public FileApkInfoAsyncTask() {
+    }
 
     @Override
     protected List<FileInfo> doInBackground(FileInfo... files) {
