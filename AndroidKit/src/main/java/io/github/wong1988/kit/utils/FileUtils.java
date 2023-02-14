@@ -17,7 +17,7 @@ import io.github.wong1988.kit.entity.FileInfo;
 import io.github.wong1988.kit.type.SortMode;
 
 public class FileUtils {
-    
+
     /**
      * 搜索手机存储文件（指定扩展名）
      * Android10（targetSdkVersion = 29）只有存储权限，部分可以搜索，如：图片、视频、音频 ；apk、文档等不能搜索
