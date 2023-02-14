@@ -19,7 +19,7 @@ import io.github.wong1988.kit.entity.FileInfo;
 import io.github.wong1988.kit.utils.FileUtils;
 
 /**
- * 必须有写的权限才能解析apk,读的权限=null
+ * 必须有读写权限才可解析apk包
  */
 public class FileApkInfoAsyncTask extends AsyncTask<FileInfo, Integer, List<FileInfo>> {
 
