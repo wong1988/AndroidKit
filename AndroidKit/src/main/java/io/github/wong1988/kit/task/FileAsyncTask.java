@@ -21,7 +21,7 @@ public class FileAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
     private final FileUtils.FileInfoChanged mChangedListener;
 
 
-    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE})
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public FileAsyncTask(FileUtils.FileInfoChanged changedListener, IFileAsyncTask taskListener) {
         this.mTaskListener = taskListener;
         this.mSortColumn = MediaStore.Files.FileColumns.DATE_MODIFIED;
@@ -29,7 +29,7 @@ public class FileAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
         this.mChangedListener = changedListener;
     }
 
-    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE})
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public FileAsyncTask(String sortColumn, SortMode sortMode, FileUtils.FileInfoChanged changedListener, IFileAsyncTask taskListener) {
         this.mTaskListener = taskListener;
         this.mSortColumn = sortColumn;
@@ -45,7 +45,7 @@ public class FileAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
     }
 
     @Override
-    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE})
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     protected List<FileInfo> doInBackground(String... extensions) {
         return FileUtils.queryMediaStoreFiles(extensions, mSortColumn, mSortMode, mChangedListener);
     }
