@@ -12,6 +12,9 @@ import io.github.wong1988.kit.task.FileApkInfoAsyncTask;
 import io.github.wong1988.kit.utils.FileUtils;
 import io.github.wong1988.media.MediaCenter;
 
+/**
+ * 解析apk包需要读写权限
+ */
 public class FileInfo {
 
     private final int index;
