@@ -17,9 +17,9 @@ Step 2. Add the dependency
 
 ```
 dependencies {
-    implementation 'com.github.wong1988:AndroidKit:1.1.2'
+    implementation 'com.github.wong1988:AndroidKit:1.1.6'
     implementation 'com.google.code.gson:gson:2.9.0'
-    implementation 'com.github.wong1988:MediaCenter:0.0.2'
+    implementation 'com.github.wong1988:MediaCenter:1.0.1'
 }
 ```
 
@@ -39,9 +39,9 @@ AndroidKit.init(application);
 
 ## Change Log
 
-1.1.2:
+1.1.6:
 
-* 加入了搜索内部存储的功能
+* 加入了搜索（数据库表）内部存储文件的功能
 
 1.1.1:
 

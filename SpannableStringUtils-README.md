@@ -14,6 +14,5 @@ drawableLeftSpannableString()
 ![](https://github.com/wong1988/AndroidKit/blob/main/image/01.png)
 图1 : drawableMargin = false
 
-
 ![](https://github.com/wong1988/AndroidKit/blob/main/image/02.png)
 图2：rawableMargin = true
