@@ -37,6 +37,8 @@ AndroidKit.init(application);
 
 ### SpannableStringUtils(文字样式的工具类) | [查看使用方式](https://github.com/wong1988/AndroidKit/blob/main/SpannableStringUtils-README.md)
 
+### FileUtils(文件相关的工具类) | [查看使用方式](https://github.com/wong1988/AndroidKit/blob/main/FileUtils-README.md)
+
 ## Change Log
 
 1.1.6:
