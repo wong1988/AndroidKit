@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import io.github.kit.example.activity.EditTextActivity;
 import io.github.kit.example.activity.FileUtilsActivity;
 import io.github.kit.example.activity.GsonActivity;
+import io.github.kit.example.activity.SettingsActivity;
 import io.github.kit.example.activity.SpannableStringUtilsActivity;
 import io.github.kit.example.activity.StringUtilsActivity;
 
@@ -38,5 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void FileUtils(View view) {
         startActivity(new Intent(this, FileUtilsActivity.class));
+    }
+
+    public void SettingsUtils(View view) {
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 }

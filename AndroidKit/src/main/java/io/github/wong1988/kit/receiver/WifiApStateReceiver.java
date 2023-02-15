@@ -12,11 +12,11 @@ import io.github.wong1988.kit.AndroidKit;
  * targetVersion 30
  * 荣耀 magic2 鸿蒙2 、华为 mate40e 鸿蒙3 、米10 Android12 测试通过
  */
-public class HotSpotStateReceiver extends BroadcastReceiver {
+public class WifiApStateReceiver extends BroadcastReceiver {
 
-    private final HotSpotStateListener listener;
+    private final WifiApStateListener listener;
 
-    public HotSpotStateReceiver(HotSpotStateListener listener) {
+    public WifiApStateReceiver(WifiApStateListener listener) {
         this.listener = listener;
     }
 
@@ -54,7 +54,7 @@ public class HotSpotStateReceiver extends BroadcastReceiver {
         }
     }
 
-    public interface HotSpotStateListener {
+    public interface WifiApStateListener {
         void state(boolean isOpen);
     }
 }

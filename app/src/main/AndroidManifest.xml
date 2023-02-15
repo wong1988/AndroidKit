@@ -41,6 +41,9 @@
         <activity
             android:name=".activity.FileUtilsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout|uiMode" />
     </application>
 
 </manifest>
