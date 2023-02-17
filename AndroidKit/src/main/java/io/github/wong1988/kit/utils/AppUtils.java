@@ -6,9 +6,12 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
+import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import androidx.annotation.RequiresPermission;
 
@@ -75,6 +78,21 @@ public class AppUtils {
         AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, restartIntent);
         killProgress();
+    }
+
+    /**
+     * 获取App名称
+     */
+    public static String getAppName() {
+        Application appContext = AndroidKit.getInstance().getAppContext();
+        PackageInfo pkgInfo = null;
+        try {
+            pkgInfo = appContext.getPackageManager().getPackageInfo(appContext.getPackageName(), PackageManager.GET_META_DATA);
+            return pkgInfo.applicationInfo.loadLabel(appContext.getPackageManager()).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public interface ActivityCollector {
