@@ -104,11 +104,13 @@ public class FileInfo {
         if (fileType == null) {
             // 还未获取过type
             fileType = MediaCenter.getMediaFileType(filePath).classify;
-            if (fileType == MediaCenter.FileClassify.APK) {
+            if (fileType == MediaCenter.FileClassify.APK)
                 // apk进行特殊处理，处理完更新
                 new FileApkInfoAsyncTask().execute(this);
+            else if (fileType == MediaCenter.FileClassify.MEDIA_AUDIO)
                 // audio进行特殊处理，处理完更新
-            }
+                new FileApkInfoAsyncTask().execute(this);
+
         }
 
         return fileType;
