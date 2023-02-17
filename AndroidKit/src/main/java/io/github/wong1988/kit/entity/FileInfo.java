@@ -26,6 +26,7 @@ public class FileInfo {
     private final int width;
     private final int height;
     private String describe;
+    private String extension;
     private MediaCenter.FileClassify fileType;
     private Drawable apkThumbnail;
     private Bitmap musicThumbnail;
@@ -113,6 +114,16 @@ public class FileInfo {
         }
 
         return fileType;
+    }
+
+    public String getExtension() {
+        if (extension == null) {
+            if (filePath != null && filePath.contains("."))
+                extension = filePath.substring(filePath.lastIndexOf("."));
+            else
+                extension = "";
+        }
+        return extension;
     }
 
     /**
