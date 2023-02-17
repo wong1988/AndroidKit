@@ -110,7 +110,6 @@ public class FileInfo {
             else if (fileType == MediaCenter.FileClassify.MEDIA_AUDIO)
                 // audio进行特殊处理，处理完更新
                 new FileApkInfoAsyncTask().execute(this);
-
         }
 
         return fileType;

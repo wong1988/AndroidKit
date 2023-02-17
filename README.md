@@ -17,9 +17,9 @@ Step 2. Add the dependency
 
 ```
 dependencies {
-    implementation 'com.github.wong1988:AndroidKit:1.1.6'
+    implementation 'com.github.wong1988:AndroidKit:1.1.9'
     implementation 'com.google.code.gson:gson:2.9.0'
-    implementation 'com.github.wong1988:MediaCenter:1.0.1'
+    implementation 'com.github.wong1988:MediaCenter:1.0.2'
 }
 ```
 
