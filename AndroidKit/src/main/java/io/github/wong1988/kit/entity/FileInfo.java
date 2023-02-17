@@ -1,6 +1,7 @@
 package io.github.wong1988.kit.entity;
 
 import android.Manifest;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.text.format.DateFormat;
 import android.text.format.Formatter;
@@ -27,6 +28,7 @@ public class FileInfo {
     private String describe;
     private MediaCenter.FileClassify fileType;
     private Drawable apkThumbnail;
+    private Bitmap musicThumbnail;
     private final FileUtils.FileInfoChanged changedListener;
 
     public FileInfo(String fileName, String filePath, long size, long time, int width, int height, FileUtils.FileInfoChanged changedListener) {
@@ -102,14 +104,19 @@ public class FileInfo {
         if (fileType == null) {
             // 还未获取过type
             fileType = MediaCenter.getMediaFileType(filePath).classify;
-            if (fileType == MediaCenter.FileClassify.APK)
+            if (fileType == MediaCenter.FileClassify.APK) {
                 // apk进行特殊处理，处理完更新
                 new FileApkInfoAsyncTask().execute(this);
+                // audio进行特殊处理，处理完更新
+            }
         }
 
         return fileType;
     }
 
+    /**
+     * 使用时注意判空
+     */
     @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public Drawable getApkThumbnail() {
         // 子线程去处理
@@ -119,6 +126,20 @@ public class FileInfo {
 
     public void setApkThumbnail(Drawable apkThumbnail) {
         this.apkThumbnail = apkThumbnail;
+    }
+
+    /**
+     * 使用时注意判空
+     */
+    @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    public Bitmap getMusicThumbnail() {
+        // 子线程去处理
+        getFileType();
+        return musicThumbnail;
+    }
+
+    public void setMusicThumbnail(Bitmap musicThumbnail) {
+        this.musicThumbnail = musicThumbnail;
     }
 
     public FileUtils.FileInfoChanged getChangedListener() {
