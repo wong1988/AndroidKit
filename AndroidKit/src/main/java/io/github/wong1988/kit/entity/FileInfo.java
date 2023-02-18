@@ -10,6 +10,7 @@ import androidx.annotation.RequiresPermission;
 
 import io.github.wong1988.kit.AndroidKit;
 import io.github.wong1988.kit.task.FileApkInfoAsyncTask;
+import io.github.wong1988.kit.task.FileAudioInfoAsyncTask;
 import io.github.wong1988.kit.utils.FileUtils;
 import io.github.wong1988.media.MediaCenter;
 
@@ -110,7 +111,7 @@ public class FileInfo {
                 new FileApkInfoAsyncTask().execute(this);
             else if (fileType == MediaCenter.FileClassify.MEDIA_AUDIO)
                 // audio进行特殊处理，处理完更新
-                new FileApkInfoAsyncTask().execute(this);
+                new FileAudioInfoAsyncTask().execute(this);
         }
 
         return fileType;

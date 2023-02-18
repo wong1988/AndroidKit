@@ -33,6 +33,7 @@ public class FileAudioInfoAsyncTask extends AsyncTask<FileInfo, Integer, List<Fi
                     mediaMetadataRetriever.setDataSource(fileInfo.getFilePath());
                     final byte[] coverImage = mediaMetadataRetriever.getEmbeddedPicture();
                     fileInfo.setMusicThumbnail(BitmapFactory.decodeByteArray(coverImage, 0, coverImage.length));
+                    infoList.add(fileInfo);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
