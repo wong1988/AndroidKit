@@ -31,6 +31,8 @@ public class FileInfo {
     private MediaCenter.FileClassify fileType;
     private Drawable apkThumbnail;
     private Bitmap musicThumbnail;
+    // 扩展字段，可自行对其set、get
+    private String extra;
     private final FileUtils.FileInfoChanged changedListener;
 
     public FileInfo(String fileName, String filePath, long size, long time, int width, int height, FileUtils.FileInfoChanged changedListener) {
@@ -157,5 +159,13 @@ public class FileInfo {
 
     public FileUtils.FileInfoChanged getChangedListener() {
         return changedListener;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 }

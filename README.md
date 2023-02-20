@@ -41,7 +41,7 @@ AndroidKit.init(application);
 
 ## Change Log
 
-1.2.2:
+1.2.3:
 
 * 加入了搜索（数据库表）内部存储文件的功能
 
