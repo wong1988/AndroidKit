@@ -23,14 +23,12 @@ public class FileUtils {
      * Android10（targetSdkVersion = 29）只有存储权限，部分可以搜索，如：图片、视频、音频 ；apk、文档等不能搜索
      * 清单文件加入 android:requestLegacyExternalStorage="true"
      * Android11（targetSdkVersion = 30）需要用到所有文件访问权限
+     * 推荐使用 FileAsyncTask对象去获取
      *
      * @param extension       筛选扩展名          如：new String[]{".png",".jpg"}
      * @param sortColumn      根据列名排序        如：MediaStore.Files.FileColumns.DATE_MODIFIED 根据修改时间进行排序
      * @param sortMode        排序模式           如：升序、降序
      * @param changedListener 数据变动的监听器     如：apk图标以及描述都为子线程获取，如果有变动请单独刷新某个item
-     *
-     *                       todo /storage/emulated/0/Android/data/com.huawei.pcassistant/cache/.dragfile_template/2.docx
-     *                        todo 应该忽略其它包下的
      */
     @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     public static List<FileInfo> queryMediaStoreFiles(String[] extension, String sortColumn, SortMode sortMode, FileInfoChanged changedListener) {

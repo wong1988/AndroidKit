@@ -12,7 +12,7 @@ import io.github.wong1988.kit.entity.FileInfo;
 import io.github.wong1988.kit.type.SortMode;
 import io.github.wong1988.kit.utils.FileUtils;
 
-public class FileAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
+public class QueryMediaStoreAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
 
     private final IFileAsyncTask mTaskListener;
 
@@ -22,7 +22,7 @@ public class FileAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
 
 
     @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    public FileAsyncTask(FileUtils.FileInfoChanged changedListener, IFileAsyncTask taskListener) {
+    public QueryMediaStoreAsyncTask(FileUtils.FileInfoChanged changedListener, IFileAsyncTask taskListener) {
         this.mTaskListener = taskListener;
         this.mSortColumn = MediaStore.Files.FileColumns.DATE_MODIFIED;
         this.mSortMode = SortMode.DESC;
@@ -30,7 +30,7 @@ public class FileAsyncTask extends AsyncTask<String, Integer, List<FileInfo>> {
     }
 
     @RequiresPermission(allOf = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    public FileAsyncTask(String sortColumn, SortMode sortMode, FileUtils.FileInfoChanged changedListener, IFileAsyncTask taskListener) {
+    public QueryMediaStoreAsyncTask(String sortColumn, SortMode sortMode, FileUtils.FileInfoChanged changedListener, IFileAsyncTask taskListener) {
         this.mTaskListener = taskListener;
         this.mSortColumn = sortColumn;
         this.mSortMode = sortMode;

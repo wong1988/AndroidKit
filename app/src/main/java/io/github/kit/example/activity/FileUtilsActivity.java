@@ -20,7 +20,7 @@ import java.util.List;
 
 import io.github.kit.example.R;
 import io.github.wong1988.kit.entity.FileInfo;
-import io.github.wong1988.kit.task.FileAsyncTask;
+import io.github.wong1988.kit.task.QueryMediaStoreAsyncTask;
 import io.github.wong1988.kit.utils.FileUtils;
 import io.github.wong1988.media.MediaCenter;
 
@@ -64,7 +64,7 @@ public class FileUtilsActivity extends AppCompatActivity {
             }
         }
 
-        new FileAsyncTask(new FileUtils.FileInfoChanged() {
+        new QueryMediaStoreAsyncTask(new FileUtils.FileInfoChanged() {
             @SuppressLint("MissingPermission")
             @Override
             public void change(FileInfo fileInfo) {
@@ -77,7 +77,7 @@ public class FileUtilsActivity extends AppCompatActivity {
                 builder.append("\n");
                 tv2.setText(builder.toString());
             }
-        }, new FileAsyncTask.IFileAsyncTask() {
+        }, new QueryMediaStoreAsyncTask.IFileAsyncTask() {
             @Override
             public void start() {
                 tv1.setText("开始");
@@ -119,12 +119,12 @@ public class FileUtilsActivity extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        new FileAsyncTask(new FileUtils.FileInfoChanged() {
+        new QueryMediaStoreAsyncTask(new FileUtils.FileInfoChanged() {
             @Override
             public void change(FileInfo fileInfo) {
 
             }
-        }, new FileAsyncTask.IFileAsyncTask() {
+        }, new QueryMediaStoreAsyncTask.IFileAsyncTask() {
             @Override
             public void start() {
                 tv1.setText("开始");
