@@ -23,7 +23,7 @@ public class FileUtils {
      * Android10（targetSdkVersion = 29）只有存储权限，部分可以搜索，如：图片、视频、音频 ；apk、文档等不能搜索
      * 清单文件加入 android:requestLegacyExternalStorage="true"
      * Android11（targetSdkVersion = 30）需要用到所有文件访问权限
-     * 推荐使用 FileAsyncTask对象去获取
+     * 推荐使用 QueryMediaStoreAsyncTask 对象去获取
      *
      * @param extension       筛选扩展名          如：new String[]{".png",".jpg"}
      * @param sortColumn      根据列名排序        如：MediaStore.Files.FileColumns.DATE_MODIFIED 根据修改时间进行排序
