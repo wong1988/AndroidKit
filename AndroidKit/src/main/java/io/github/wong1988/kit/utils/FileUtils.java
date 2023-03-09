@@ -83,7 +83,7 @@ public class FileUtils {
                     // 高
                     int height = cursor.getInt(5);
                     // 添加到文件集合
-                    fileInfoList.add(new FileInfo(fileInfoList.size(), name, path, size, time, width, height, changedListener));
+                    fileInfoList.add(new FileInfo(name, path, true, size, time, width, height, changedListener));
                 } catch (Exception e) {
                     Log.e("FileUtils", "searchExternalFiles()", e);
                 }

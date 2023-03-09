@@ -19,9 +19,9 @@ import io.github.wong1988.media.MediaCenter;
  */
 public class FileInfo {
 
-    private final int index;
     private final String fileName;
     private final String filePath;
+    private final boolean isFile;
     private final long size;
     private final long time;
     private final int width;
@@ -35,25 +35,10 @@ public class FileInfo {
     private String extra;
     private final FileUtils.FileInfoChanged changedListener;
 
-    public FileInfo(String fileName, String filePath, long size, long time, int width, int height, FileUtils.FileInfoChanged changedListener) {
-        this.index = -1;
+    public FileInfo(String fileName, String filePath, boolean isFile, long size, long time, int width, int height, FileUtils.FileInfoChanged changedListener) {
         this.fileName = fileName;
         this.filePath = filePath;
-        this.size = size;
-        this.time = time;
-        this.width = width;
-        this.height = height;
-        this.changedListener = changedListener;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public FileInfo(int index, String fileName, String filePath, long size, long time, int width, int height, FileUtils.FileInfoChanged changedListener) {
-        this.index = index;
-        this.fileName = fileName;
-        this.filePath = filePath;
+        this.isFile = isFile;
         this.size = size;
         this.time = time;
         this.width = width;
@@ -67,6 +52,10 @@ public class FileInfo {
 
     public String getFilePath() {
         return filePath;
+    }
+
+    public boolean isFile() {
+        return isFile;
     }
 
     public long getSize() {
